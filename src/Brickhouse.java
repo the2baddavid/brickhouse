@@ -78,9 +78,14 @@ public class Brickhouse {
             row_perm_index = roper.get_starting_size((int)height,row_number);
             
             // Create Validator Object to Pass All Row Perms to
-            validator validate = new validator();
-            for(int index = 0; index < row_perm_index; index++){
-                //  validate.validate_all(1,2);
+            validator validate = new validator(row_array,row_perm);
+            
+            // Check All Row Perms and ...
+            for(int index = 1; index < row_perm_index; index++){
+                //Increment Correct when Valid
+                if (validate.validate_all(index,(int)height)){
+                    correct ++;
+                }
             }
         }
         // Otherwise, all rows of correct length are correct
