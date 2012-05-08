@@ -39,6 +39,10 @@ public class row {
         return sum;
     }
     
+    public int get_row_size(){
+        return my_length;
+    }
+    
     public void set_hash(){
         double sum = 0;
         
