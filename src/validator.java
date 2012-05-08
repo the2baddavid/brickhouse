@@ -24,7 +24,7 @@ public class validator {
     
     /**
      * Validate all the rows, using the validate two function for when there
-     * are more than two rows
+     * are more than two rows. Also needs to get proper rows based on perm
      * 
      * @param row permutation of rows to check
      */
@@ -33,7 +33,7 @@ public class validator {
         
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){
-            if ( validate_two() ){
+            if ( validate_two(index-1,index) ){
                 // Continue
             }
             // Otherwise Exit
@@ -54,11 +54,26 @@ public class validator {
      * @param array2
      * @return whether the rows are valid together
      */
-    static boolean validate_two(){
+     private boolean validate_two(int index1, int index2){
         boolean cont = true;
+        
+        row row1 = (row) row_array.get(index1); 
+        row row2 = (row) row_array.get(index2);
+        
+        ArrayList hash1 = new ArrayList();
+        ArrayList hash2 = new ArrayList();
+        
+        hash1.addAll(row1.get_hash());
+        hash2.addAll(row2.get_hash());
 
         // for loop to see if one contains an element of the other
+        for (int index = 0; index < row1.get_row_size(); index++){
+            // if one does, then the bricks lineup and set is invalid
+            if (hash1.contains(hash2.get(index))){
+                return false;
+            }
+        }
         
-        return cont;
+        return true;
     }    
 }
