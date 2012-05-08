@@ -1,5 +1,3 @@
-package brickhouse;
-
 /*
 Your niece was given a set of blocks for her birthday, and she has decided to build a panel using
 3”×1” and 4.5”×1" blocks. For structural integrity, the spaces between the blocks must not line up

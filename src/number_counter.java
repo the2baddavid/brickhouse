@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package brickhouse;
 
 /**
  * Creates 2d Array counting by given base to given width

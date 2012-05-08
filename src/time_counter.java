@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package brickhouse;
 
 /**
  * Counter class is used for stop watching the runtime
