@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Creates ArrayList of Row Objects
- * 
+ * TODO: might have some issues from array list conversion in here
  * @author david
  */
 public class number_counter{
