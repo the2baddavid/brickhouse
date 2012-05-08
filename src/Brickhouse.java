@@ -24,10 +24,14 @@ Send the source code and let us know the value that your program computes, your 
 running time, and the kind of machine on which you ran it.
  */
 
-import java.util.Hashtable;
+import java.util.ArrayList;
 
 /**
- *
+ * TODO: Test the 2 row checking
+ * TODO: Throw out rows that are incorrect length
+ * TODO: Fix validation functions
+ * TODO: Change from array of rows to arraylist?
+ * 
  * @author david
  */
 public class Brickhouse {
@@ -41,12 +45,12 @@ public class Brickhouse {
     static final int rowLength = 100;
     static final int numberOfRows = 1000;
     
+    static int row_number = 0;
+    static ArrayList row_array = new ArrayList();
+    
     static int row_perm_index = 0;
     static int row_perm[][];
-    
-    static int row_number = 0;
-    static double row_array[][] = new double[numberOfRows][rowLength];
-    
+
     static double brick1 = 3;
     static double brick2 = 4.5;
     
@@ -68,6 +72,9 @@ public class Brickhouse {
         number_counter row_create = new number_counter();
         row_array = row_create.row_generator((int)height,2);
         row_number = row_create.get_size((int)height,2);
+        
+        // Remove Permutations that are the correct length to a vector
+        
         
         // Find permutations of rows
         number_counter roper = new number_counter();

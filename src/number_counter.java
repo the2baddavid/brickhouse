@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+import java.util.ArrayList;
 
 /**
  * Creates 2d Array counting by given base to given width
@@ -11,20 +8,28 @@ public class number_counter{
     /**
      * Create different possibilities for rows
      * Create permutations of rows based on length, with length being unknown
+     * Uses row[] object to house data, which is all nested into array of rows
      *
-     * @param 
+     * @param length
+     * @param base
+     * @return row_array 
      */    
-    public double[][] row_generator(int length, int base){
+    public ArrayList row_generator(int length, int base){
         int amount = (int)Math.pow(base, length);
-        double output[][] = new double[amount][length];
+        ArrayList row_array = new ArrayList();
 
         for(int before = 0; before < amount; before++){
+            //Convert number:base10 to base2
             String temp_string = convert_base(before,base);
+            //take output(String) and convert to double[]
             double temp_num[] = convert_amount_and_type(temp_string);
-            output[before] = temp_num;
-            printit(temp_num,temp_string.length());
+            //create new row object to hold double[]
+            row temp_row = new row(temp_num,length);
+            //copy new object in array of objects
+            row_array.add(temp_row);
+        //    printit(temp_num,temp_string.length()); // for debugging
         }
-        return output;
+        return row_array;
     }
     
     /**
@@ -34,21 +39,21 @@ public class number_counter{
      * @param base
      * @return 
      */
-    static int[][] roper(int length,int base){
+    public int[][] roper(int length,int base){
         int amount = (int)Math.pow(base, length);
         int output[][] = new int[amount][length];
         
         for(int before = 0; before < amount;before++){
             String temp_string = convert_base(before,base);
             output[before] = convert_type(temp_string);
-            printit(output[before],temp_string.length());
+    //        printit(output[before],temp_string.length()); // for debugging
         }
         
         return output;
     }
 
     /**
-     * Takes a number of base 10 as input, then converts the number to
+     * Roper -- Takes a number of base 10 as input, then converts the number to
      * the specified base and returns it as a string; recursive
      * 
      * @param number what to convert
@@ -65,7 +70,7 @@ public class number_counter{
     }
 
     /**
-     * For the instance of rows, the bricks are not lengths of 1 and 0, so
+     * Row gen -- For the instance of rows, the bricks are not lengths of 1 and 0, so
      * this function will convert them to 3 & 4.5
      * 
      * @param input
@@ -90,8 +95,8 @@ public class number_counter{
     }
     
     /**
-     * Simply converts the strings that are output from convert base function
-     * into array of integers
+     * Roper -- Simply converts the strings that are output from convert
+     * base function into array of integers
      * 
      * @param input
      * @return 
@@ -109,20 +114,20 @@ public class number_counter{
     }
 
     /**
-     * Function prints to std out from a double[]
+     * Row Gen -- Function prints to std out from a double[]
      * 
      * @param input
      * @param size 
      */
-    public static void printit(double input[], int size){
+    public static void printit(ArrayList input, int size){
 
         for (int index=0;index < size;index++)
-                System.out.print(input[index]);
+                System.out.print(input.get(index));
         System.out.print("\n");
     }
     
     /**
-     * Function prints to std-out from an int[]
+     * Roper -- Function prints to std-out from an int[]
      * 
      * @param input
      * @param size 
@@ -135,13 +140,15 @@ public class number_counter{
     }
     
     /**
-     * returns number of permutations using powers, base^length
+     * returns number of permutations using powers, base^length, however this
+     * will be more than the actual, as the actual will only have rows with
+     * the correct length, however makes a good starting point
      * 
      * @param length
      * @param base
      * @return 
      */
-    public int get_size(int length, int base){
+    public int get_starting_size(int length, int base){
         return (int)Math.pow(base, length);
     }
 }
