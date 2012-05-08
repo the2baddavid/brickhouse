@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 
 /**
- * Creates 2d Array counting by given base to given width
+ * Creates ArrayList of Row Objects
+ * 
  * @author david
  */
 public class number_counter{
