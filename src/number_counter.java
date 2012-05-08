@@ -26,8 +26,10 @@ public class number_counter{
             double temp_num[] = convert_amount_and_type(temp_string);
             //create new row object to hold double[]
             row temp_row = new row(temp_num,length);
-            //copy new object in array of objects
-            row_array.add(temp_row);
+            //copy new object in array of objects if correct length
+            if (temp_row.get_row_length() == length){
+                row_array.add(temp_row);
+            }
         //    printit(temp_num,temp_string.length()); // for debugging
         }
         return row_array;

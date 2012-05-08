@@ -27,6 +27,10 @@ public class row {
         my_row[index] = input;
     }
     
+    /**
+     * Sums contents of Array, and returns answer
+     * @return 
+     */
     public double get_row_length(){
         double sum = 0;
         for (int index = 0; index < my_length; index++){
