@@ -1,4 +1,0 @@
-brickhouse
-==========
-
-brick puzzle
