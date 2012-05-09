@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * 
  * @author david
  */
+
 public class number_counter{
     /**
      * Create different possibilities for rows
@@ -21,11 +22,7 @@ public class number_counter{
     
     double brick1;
     double brick2;
-    
-    /**
-     * Used for creating rows
-     */
-    public number_counter(){}
+
     
     /**
      * Used for creating bricks
@@ -41,50 +38,42 @@ public class number_counter{
     public ArrayList row_generator(int len, int base){
         int amount = (int)Math.pow(base, len);
         ArrayList row_array = new ArrayList();
-
-        for(int before = 0; before < amount; before++){
-            //Convert number:base10 to base2
-            String temp_string = convert_base(before,base);
-            //take output(String) and convert to double[]
-            double temp_num[] = convert_amount_and_type(temp_string);
-            //create new row object to hold double[]
-            row temp_row = new row(temp_num,len,temp_num.length);
-            //copy new object in array of objects if correct length
-            if (temp_row.get_row_length() == len){
-                row_array.add(temp_row);
+        
+        // Test if length is greater than the sum, true do normal op
+        if ( len > (brick1+brick2)){
+			for(int before = 4; before < amount; before++){
+				//Convert number:base10 to base2
+				String temp_string = convert_base(before,base);
+				System.out.println(temp_string);
+				//take output(String) and convert to double[]
+				double temp_num[] = convert_amount_and_type(temp_string);
+				//create new row object to hold double[]
+				row temp_row = new row(temp_num,len,temp_num.length);
+				//copy new object in array of objects if correct length
+				
             }
-            //printit(temp_num,temp_string.length()); // for debugging
+		}
+		// Otherwise use prebuilt set of potentials
+		else{
+			double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
+						
+			for (int index = 0;index < 6; index++){
+				row temp_row = new row(temp_num[index],len,temp_num[index].length);
+				
+				if (temp_row.get_row_length() == len){
+					row_array.add(temp_row);
+				}
+				printit(temp_num[index],2);
+			}
         }
         return row_array;
     }
     
     /**
-     * Create possible matches of rows to check
      * 
-     * @param length
+     * @param number
      * @param base
      * @return 
-     */
-    public int[][] roper(int length,int base){
-        int amount = (int)Math.pow(base, length);
-        int output[][] = new int[amount][length];
-        
-        for(int before = 0; before < amount;before++){
-            String temp_string = convert_base(before,base);
-            output[before] = convert_type(temp_string, length);
-            printit(output[before],temp_string.length()); // for debugging
-        }
-        
-        return output;
-    }
-
-    /**
-     * Roper -- Takes a number of base 10 as input, then converts the number to
-     * the specified base and returns it as a string; recursive
-     * 
-     * @param number what to convert
-     * @param base base to convert to
-     * @return string containing conversion
      */
     public String convert_base(int number, int base){
         if (number > 1){
@@ -94,7 +83,7 @@ public class number_counter{
                 return number%base+"";
         }
     }
-
+    
     /**
      * Row gen -- For the instance of rows, the bricks are not lengths of 1 and 0, so
      * this function will convert them to brick1 & brick2
@@ -120,25 +109,7 @@ public class number_counter{
         return output;
     }
     
-    /**
-     * Roper -- Simply converts the strings that are output from convert
-     * base function into array of integers
-     * 
-     * @param input
-     * @return 
-     */
-    public int[] convert_type(String input,int len){
-        int size = input.length();
-        int output[] = new int[len];
-        
-        for(int index = 0;index < size; index++){
-            String temp = input.charAt(index)+"";
-            output[index+(len-size)] = Integer.parseInt(temp);
-        }
-        
-        return output;
-    }
-
+    
     /**
      * Row Gen -- Function prints to std out from a double[]
      * 
@@ -149,19 +120,6 @@ public class number_counter{
 
         for (int index=0;index < size;index++)
                 System.out.print(input.get(index));
-        System.out.print("\n");
-    }
-    
-    /**
-     * Roper -- Function prints to std-out from an int[]
-     * 
-     * @param input
-     * @param size 
-     */
-    public static void printit(int input[], int size){
-
-        for (int index=0;index < size;index++)
-                System.out.print(input[index]);
         System.out.print("\n");
     }
     
