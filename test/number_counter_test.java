@@ -74,6 +74,15 @@ public class number_counter_test {
     }
     
     @Test
+    public void convert_type_test(){
+        String input = "01011";
+        int expected[] = {0,1,0,1,1};
+        int result[] = row_create.convert_type(input);
+        
+        assertArrayEquals(expected, result);        
+    }
+    
+    @Test
     public void row_gen_test(){
         // initialize counter
         // generate rows

@@ -127,12 +127,12 @@ public class number_counter{
      * @param input
      * @return 
      */
-    private static int[] convert_type(String input){
+    public int[] convert_type(String input){
         int size = input.length();
         int output[] = new int[size];
         
         for(int index = 0;index < size; index++){
-			String temp = input.charAt(index)+"";
+            String temp = input.charAt(index)+"";
             output[index] = Integer.parseInt(temp);
         }
         
