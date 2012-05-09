@@ -13,6 +13,7 @@ public class row {
     public row(double input[], int row_length, int array_length){
         my_row_length = row_length;
         my_row = new double[my_row_length];
+        my_row_length = array_length;
         System.arraycopy(input, 0, my_row, 0, my_row_length); // TODO Why does this error
     }
     

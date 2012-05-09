@@ -98,6 +98,6 @@ public class Brickhouse {
         runtime = count.runTime();
         
         System.out.println("Number of Correct Answers"+correct);
-        System.out.println("Run Time:"+runtime);
+        System.out.println("Run Time:"+runtime+" ms");
     }
 }
