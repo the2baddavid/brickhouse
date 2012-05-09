@@ -25,13 +25,15 @@ public class row_counter {
      * @param base
      * @return 
      */
-    public int[][] roper(int length,int base){
-        int amount = (int)Math.pow(base, length);
-        int output[][] = new int[amount][length];
+    public int[][] roper(int height,int rows){
+        int amount = (int)Math.pow(rows, height);
+        int output[][] = new int[amount][height];
         
-        for(int before = 0; before < amount;before++){
-            String temp_string = convert_base(before,base);
-            output[before] = convert_type(temp_string, length);
+        // starting point
+        
+        for(int before = 0; before < amount; before++){
+            String temp_string = convert_base(before,rows);
+            output[before] = convert_type(temp_string, height);
             //printit(output[before],length); // for debugging
         }
         
@@ -51,7 +53,7 @@ public class row_counter {
                 return convert_base(number/base,base) + "" +number%base;
         }
         else{
-                return number%base+"";
+                return "";
         }
     }
     
