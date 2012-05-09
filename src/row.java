@@ -6,15 +6,15 @@ import java.util.ArrayList;
  */
 public class row {
     private double my_row[];
-    private int my_row_length;
+    private double my_row_length;
     private int my_array_length;
     private ArrayList sum_hash = new ArrayList();
     
-    public row(double input[], int row_length, int array_length){
+    public row(double input[], double row_length, int array_length){
         my_row_length = row_length;
-        my_row = new double[my_row_length];
+        my_row = new double[(int) my_row_length];
         my_row_length = array_length;
-        System.arraycopy(input, 0, my_row, 0, my_row_length); // TODO Why does this error
+        System.arraycopy(input, 0, my_row, 0, my_array_length);
     }
     
     public double[] get_row(){
@@ -22,7 +22,7 @@ public class row {
     }
     
     public void set_row(double input[]){
-        System.arraycopy(input, 0, my_row, 0, my_row_length);
+        System.arraycopy(input, 0, my_row, 0, my_array_length);
     }
     
     public void set_row_piece(double input, int index){
@@ -41,7 +41,7 @@ public class row {
         return sum;
     }
     
-    public int get_row_size(){
+    public double get_row_size(){
         return my_row_length;
     }
     
