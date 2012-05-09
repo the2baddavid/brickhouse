@@ -67,10 +67,10 @@ public class number_counter_test {
     @Test
     public void convert_base_test(){
         int input = 20;
-        String expected = "01011";
+        String expected = "10100";
         String result = row_create.convert_base(input, 2);
         
-        assertEquals(expected, result, .001);
+        assertTrue(expected.equals(result));
     }
     
     @Test
@@ -87,10 +87,22 @@ public class number_counter_test {
         // initialize counter
         // generate rows
    
-        int power = (int) Math.pow(2,2);
+        
         // for loop
         // get array for each row in arraylist
         // print array        
         
+    }
+    
+    @Test
+    public void roper_test(){
+        // length =2
+        // base =2 
+        int expected[][] = {{0},{1},{1,0},{1,1}};
+        int result[][] = row_create.roper(2,2);
+        
+        for(int index = 0; index < 4; index++){
+            assertArrayEquals(expected, result);
+        }
     }
 }

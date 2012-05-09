@@ -53,7 +53,7 @@ public class number_counter{
             if (temp_row.get_row_length() == len){
                 row_array.add(temp_row);
             }
-            printit(temp_num,temp_string.length()); // for debugging
+            //printit(temp_num,temp_string.length()); // for debugging
         }
         return row_array;
     }
