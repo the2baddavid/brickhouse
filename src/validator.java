@@ -40,8 +40,7 @@ public class validator {
      */
     public boolean validate_all(int row_perm_to_check){
 	int temp[] = row_perm[row_perm_to_check];
-        System.out.println("perm"+row_perm_to_check);
-                
+                        
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){
                         
@@ -73,15 +72,12 @@ public class validator {
         
         // Length of Both!
         if(!test_length(index1)){
-            System.out.println("index1 bad length"+index1);
             return false;
 		}
         if(!test_length(index2)){
-            System.out.println("index2 bad length");
             return false;
         }
-        System.out.println("good length");
-        
+                
         row row1 = row_array[index1]; 
         row row2 = row_array[index2];
         
@@ -92,14 +88,22 @@ public class validator {
         hash2.addAll(row2.get_hash());
         
         // for loop to see if one contains an element of the other
-        for (int index = 0; index < hash1.size(); index++){
+        // however, the end must be ignored of course
+        int count =0;
+        for (int index = hash1.size()-1; index >= 0 ; index--){
             // if one does, then the bricks lineup and set is invalid
             if (hash1.contains(hash2.get(index))){
-                return false;
+                count++;
             }
         }
         
-        return true;
+        // Should fix the false positive issue with ends
+        if (count > 1){
+            return false;
+        }
+        else{
+            return true;
+        }
     }
      
      /**

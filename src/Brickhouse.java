@@ -56,7 +56,7 @@ public class Brickhouse {
         count.start();
         
         // variables to return
-        double correct = 0;
+        long correct = 0;
         double runtime;
         
         // Set Input
@@ -100,7 +100,7 @@ public class Brickhouse {
         count.end();
         runtime = count.runTime();
         
-        System.out.print(correct);
+        System.out.print((long)correct);
         //System.out.println("Run Time:"+runtime+" ms");
     }
 }
