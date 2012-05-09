@@ -86,7 +86,7 @@ public class number_counter{
      * @param base base to convert to
      * @return string containing conversion
      */
-    private static String convert_base(int number, int base){
+    public String convert_base(int number, int base){
         if (number > 1){
                 return convert_base(number/base,base) + "" +number%base;
         }
