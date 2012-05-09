@@ -4,8 +4,8 @@
  */
 
 import java.util.ArrayList;
-import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  *
@@ -32,20 +32,13 @@ public class number_counter_test {
     
     @Before
     public void setUp() {
-        row_create = new number_counter(brick1, brick2);
-        row_array = row_create.row_generator((int)length,2);
-        row_number = row_array.size();
-        
+        row_create = new number_counter(brick1, brick2);     
     }
     
     @After
     public void tearDown() {
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    
     
     @Test
     public void convert_amount_type_test(){
@@ -80,18 +73,6 @@ public class number_counter_test {
         int result[] = row_create.convert_type(input,input.length());
         
         assertArrayEquals(expected, result);        
-    }
-    
-    @Test
-    public void row_gen_test(){
-        // initialize counter
-        // generate rows
-   
-        
-        // for loop
-        // get array for each row in arraylist
-        // print array        
-        
     }
     
     @Test
