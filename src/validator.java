@@ -15,11 +15,17 @@ public class validator {
     //TODO: Add Private Fields
     private row[] row_array;
     private int row_perm[][];
+    private double length;
     
-    // TODO: Constructor
-    public validator(row[] al1, int[][] r1){
+   
+    public validator(row[] al1, int[][] r1, double l){
         row_array = al1;
         row_perm = r1;
+        length = l;
+}
+    public validator(row[] al1, double l){
+        row_array = al1;
+        length = l;
 }
     
     /**
@@ -89,5 +95,9 @@ public class validator {
         }
         
         return true;
-    }    
+    }
+     
+     public boolean test_length(int index){
+         return ( row_array[index].get_row_length() == length);
+     }
 }
