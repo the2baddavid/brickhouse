@@ -77,7 +77,7 @@ public class number_counter_test {
     public void convert_type_test(){
         String input = "01011";
         int expected[] = {0,1,0,1,1};
-        int result[] = row_create.convert_type(input);
+        int result[] = row_create.convert_type(input,input.length());
         
         assertArrayEquals(expected, result);        
     }
@@ -98,7 +98,7 @@ public class number_counter_test {
     public void roper_test(){
         // length =2
         // base =2 
-        int expected[][] = {{0},{1},{1,0},{1,1}};
+        int expected[][] = {{0,0},{0,1},{1,0},{1,1}};
         int result[][] = row_create.roper(2,2);
         
         for(int index = 0; index < 4; index++){

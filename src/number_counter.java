@@ -71,7 +71,7 @@ public class number_counter{
         
         for(int before = 0; before < amount;before++){
             String temp_string = convert_base(before,base);
-            output[before] = convert_type(temp_string);
+            output[before] = convert_type(temp_string, length);
     //        printit(output[before],temp_string.length()); // for debugging
         }
         
@@ -127,13 +127,13 @@ public class number_counter{
      * @param input
      * @return 
      */
-    public int[] convert_type(String input){
+    public int[] convert_type(String input,int len){
         int size = input.length();
-        int output[] = new int[size];
+        int output[] = new int[len];
         
         for(int index = 0;index < size; index++){
             String temp = input.charAt(index)+"";
-            output[index] = Integer.parseInt(temp);
+            output[index+(len-size)] = Integer.parseInt(temp);
         }
         
         return output;
