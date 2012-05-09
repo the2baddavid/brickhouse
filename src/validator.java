@@ -40,11 +40,11 @@ public class validator {
      */
     public boolean validate_all(int row_perm_to_check){
 	int temp[] = row_perm[row_perm_to_check];
+        System.out.println("perm"+row_perm_to_check);
                 
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){
-            System.out.println("perm"+(index-1));
-            
+                        
             // Send indexes of 2 rows to check from the current perm
             if ( validate_two(temp[index-1],temp[index]) == true ){
                 //System.out.println("true");
