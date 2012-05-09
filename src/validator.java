@@ -26,10 +26,24 @@ public class validator {
      * Validate all the rows, using the validate two function for when there
      * are more than two rows. Also needs to get proper rows based on perm
      * 
+     * TODO: Probably this function will give me trouble
+     * 
      * @param row permutation of rows to check
      */
-    public boolean validate_all(int row_perm_to_check, int height){
-        boolean verify = true;
+    public boolean validate_all(int row_perm_to_check, int height){        
+        // TODO: Get row indices where height correct!
+        int rows[] = new int[height];
+        int rows_index = 0;             // Used for adding indexs to rows
+        
+        // Add rows to rows[] based on row_perm_to_check
+        for (int index = 0; index < height; index++){
+            if (row_perm[row_perm_to_check][index] == 1){
+                rows[rows_index] = index;
+                rows_index++;
+            }
+        }
+        /* Now we should have an array containing the indexes of only the 
+         rows to check */
         
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){

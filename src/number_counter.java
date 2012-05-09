@@ -2,7 +2,10 @@ import java.util.ArrayList;
 
 /**
  * Creates ArrayList of Row Objects
+ * 
  * TODO: might have some issues from array list conversion in here
+ * TODO: Switch row permutations over to array list?
+ * 
  * @author david
  */
 public class number_counter{
@@ -11,12 +14,12 @@ public class number_counter{
      * Create permutations of rows based on length, with length being unknown
      * Uses row[] object to house data, which is all nested into array of rows
      *
-     * @param length
+     * @param len
      * @param base
      * @return row_array 
      */    
-    public ArrayList row_generator(int length, int base){
-        int amount = (int)Math.pow(base, length);
+    public ArrayList row_generator(int len, int base){
+        int amount = (int)Math.pow(base, len);
         ArrayList row_array = new ArrayList();
 
         for(int before = 0; before < amount; before++){
@@ -25,9 +28,9 @@ public class number_counter{
             //take output(String) and convert to double[]
             double temp_num[] = convert_amount_and_type(temp_string);
             //create new row object to hold double[]
-            row temp_row = new row(temp_num,length);
+            row temp_row = new row(temp_num,len,temp_num.length);
             //copy new object in array of objects if correct length
-            if (temp_row.get_row_length() == length){
+            if (temp_row.get_row_length() == len){
                 row_array.add(temp_row);
             }
         //    printit(temp_num,temp_string.length()); // for debugging
