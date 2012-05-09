@@ -42,7 +42,7 @@ public class Brickhouse {
     static final int numberOfRows = 1000;
     
     static int row_number = 0;
-    static ArrayList row_array = new ArrayList();
+    static row row_array[];
     
     static int row_perm_index = 0;
     static int row_perm[][];
@@ -67,13 +67,13 @@ public class Brickhouse {
         // Create Permutations or Rows
         number_counter row_create = new number_counter(brick1, brick2);
         row_array = row_create.row_generator((int)length,2);
-        row_number = row_array.size();
+        row_number = row_array.length;
                 
         // Find permutations of Row Cominations, if Height > 1
         if (height > 1){
             
             //  Create Counter to Create All Perms of Row Combinations
-            number_counter roper = new number_counter();
+            row_counter roper = new row_counter();
             row_perm = roper.roper((int)height,row_number);
             row_perm_index = roper.get_starting_size((int)height,row_number);
             

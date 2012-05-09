@@ -3,9 +3,6 @@ import java.util.ArrayList;
 /**
  * Creates ArrayList of Row Objects
  * 
- * TODO: might have some issues from array list conversion in here
- * TODO: Switch row permutations over to array list?
- * 
  * @author david
  */
 
@@ -35,38 +32,58 @@ public class number_counter{
     }
     
     
-    public ArrayList row_generator(int len, int base){
+    public row[] row_generator(int len, int base){
         int amount = (int)Math.pow(base, len);
-        ArrayList row_array = new ArrayList();
+        row output[]; 
         
         // Test if length is greater than the sum, true do normal op
         if ( len > (brick1+brick2)){
-			for(int before = 4; before < amount; before++){
-				//Convert number:base10 to base2
-				String temp_string = convert_base(before,base);
-				System.out.println(temp_string);
-				//take output(String) and convert to double[]
-				double temp_num[] = convert_amount_and_type(temp_string);
-				//create new row object to hold double[]
-				row temp_row = new row(temp_num,len,temp_num.length);
-				//copy new object in array of objects if correct length
-				
+            output = new row[amount];
+
+            for(int before = 0; before < amount; before++){
+                System.out.println("before"+before);
+
+                //Convert number:base10 to base2
+                String temp_string = convert_base(before,base);
+                System.out.println("base conversion:"+temp_string);
+
+                //take output(String) and convert to double[]
+                double temp_num[] = convert_amount_and_type(temp_string);
+                printit(temp_num, temp_num.length);
+
+                //create new row object to hold double[]
+                row temp_row = new row(temp_num,len,temp_num.length);
+
+                //copy new object in array of objects if correct length
+                output[before]=temp_row;
+                System.out.println(temp_row.get_row());
             }
-		}
-		// Otherwise use prebuilt set of potentials
-		else{
-			double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
-						
-			for (int index = 0;index < 6; index++){
-				row temp_row = new row(temp_num[index],len,temp_num[index].length);
-				
-				if (temp_row.get_row_length() == len){
-					row_array.add(temp_row);
-				}
-				printit(temp_num[index],2);
-			}
         }
-        return row_array;
+
+    // Otherwise use prebuilt set of potentials
+    else{
+            output = new row[6];			
+            double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
+
+            for (int index = 0;index < 6; index++){
+
+            /*	System.out.print("before:");
+                    printit(temp_num[index],temp_num[index].length);
+                    System.out.println(temp_num[index].length); */
+
+                    row temp_row = new row(temp_num[index],len,temp_num[index].length);
+
+            /*	System.out.print("temp:");
+                    printit(temp_row.get_row(),temp_num[index].length); */
+
+                    output[index] = temp_row;
+
+            /*	System.out.print("after:");
+                    printit(output[index].get_row(),temp_num[index].length); 
+                    System.out.println( "length"+temp_row.get_row_length() );	// for debugging	*/
+            }
+        }
+        return output;
     }
     
     /**

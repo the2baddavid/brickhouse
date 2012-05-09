@@ -1,17 +1,16 @@
 
 /**
- *
+ * Create different possibilities for rows
  * @author david
  */
 public class row_counter {
-	     /**
+    /**
      * Create different possibilities for rows
      * Create permutations of rows based on length, with length being unknown
      * Uses row[] object to house data, which is all nested into array of rows
+     * 
+     *TODO: Switch row permutations over to array list?
      *
-     * @param len
-     * @param base
-     * @return row_array 
      */    
     
     double brick1;

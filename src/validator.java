@@ -13,12 +13,12 @@ import java.util.ArrayList;
  */
 public class validator {
     //TODO: Add Private Fields
-    private ArrayList row_array = new ArrayList();
+    private row[] row_array;
     private int row_perm[][];
     
     // TODO: Constructor
-    public validator(ArrayList al1, int[][] r1){
-        row_array.addAll(al1);
+    public validator(row[] al1, int[][] r1){
+        row_array = al1;
         row_perm = r1;
 }
     
@@ -71,8 +71,8 @@ public class validator {
      private boolean validate_two(int index1, int index2){
         boolean cont = true;
         
-        row row1 = (row) row_array.get(index1); 
-        row row2 = (row) row_array.get(index2);
+        row row1 = row_array[index1]; 
+        row row2 = row_array[index2];
         
         ArrayList hash1 = new ArrayList();
         ArrayList hash2 = new ArrayList();

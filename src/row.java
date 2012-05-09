@@ -12,7 +12,7 @@ public class row {
     
     public row(double input[], double row_length, int array_length){
         my_row_length = row_length;
-        my_row = new double[(int) my_row_length];
+        my_row = input;
         my_row_length = array_length;
         System.arraycopy(input, 0, my_row, 0, my_array_length);
     }
