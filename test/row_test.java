@@ -13,7 +13,7 @@ import org.junit.*;
  */
 public class row_test {
 
-    double test_row[] = { 3, 3, 4.5, 3};
+    double test_row[] = { 2, 4, 4.5, 3};
     double row_length = 13.5;
     int array_length = 4;
     row test_object;    
@@ -30,8 +30,6 @@ public class row_test {
     
     @Before
     public void setUp() {
-        
-        
         test_object = new row(test_row,row_length,array_length);
     }
     
@@ -46,7 +44,7 @@ public class row_test {
     
     @Test
     public void test_get_row(){
-        double expected[] = {};
+        double expected[] = test_row;
         double result [] = test_object.get_row();
         
         for (int index =0; index < array_length; index++)
@@ -71,7 +69,7 @@ public class row_test {
     
     public void test_get_hash(){
         String input = null;
-        double expected[] = {  3, 6, 10.5, 13.5 };
+        double expected[] = {  2, 6, 10.5, 13.5 };
         ArrayList result = test_object.get_hash();
         
         // TODO: Create Hash Test

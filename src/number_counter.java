@@ -18,6 +18,26 @@ public class number_counter{
      * @param base
      * @return row_array 
      */    
+    
+    double brick1;
+    double brick2;
+    
+    /**
+     * Used for creating rows
+     */
+    public number_counter(){}
+    
+    /**
+     * Used for creating bricks
+     * @param b1
+     * @param b2 
+     */
+    public number_counter(double b1, double b2){
+        brick1 = b1;
+        brick2 = b2;
+    }
+    
+    
     public ArrayList row_generator(int len, int base){
         int amount = (int)Math.pow(base, len);
         ArrayList row_array = new ArrayList();
@@ -33,7 +53,7 @@ public class number_counter{
             if (temp_row.get_row_length() == len){
                 row_array.add(temp_row);
             }
-        //    printit(temp_num,temp_string.length()); // for debugging
+            printit(temp_num,temp_string.length()); // for debugging
         }
         return row_array;
     }
@@ -77,21 +97,21 @@ public class number_counter{
 
     /**
      * Row gen -- For the instance of rows, the bricks are not lengths of 1 and 0, so
-     * this function will convert them to 3 & 4.5
+     * this function will convert them to brick1 & brick2
      * 
      * @param input
      * @return 
      */
-    private static double[] convert_amount_and_type(String input){
+    public double[] convert_amount_and_type(String input){
         int size = input.length();
         double output[] = new double[size];
 
         for(int index = 0; index < size; index++){
                 double temp = (double)input.charAt(index);
                 if(temp == '0')
-                        temp = 3;
+                        temp = brick1;
                 else if (temp == '1')
-                        temp = 4.5;
+                        temp = brick2;
                 else
                         temp = 0;
                 output[index] = temp;
@@ -139,6 +159,13 @@ public class number_counter{
      * @param size 
      */
     public static void printit(int input[], int size){
+
+        for (int index=0;index < size;index++)
+                System.out.print(input[index]);
+        System.out.print("\n");
+    }
+    
+    public void printit(double input[], int size){
 
         for (int index=0;index < size;index++)
                 System.out.print(input[index]);

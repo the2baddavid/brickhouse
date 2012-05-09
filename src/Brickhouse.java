@@ -65,7 +65,7 @@ public class Brickhouse {
         length = Double.parseDouble(args[1]);
         
         // Create Permutations or Rows
-        number_counter row_create = new number_counter();
+        number_counter row_create = new number_counter(brick1, brick2);
         row_array = row_create.row_generator((int)length,2);
         row_number = row_array.size();
                 
