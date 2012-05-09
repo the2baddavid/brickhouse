@@ -1,4 +1,4 @@
-
+// Fix all output
 import java.util.ArrayList;
 
 /*
@@ -16,12 +16,14 @@ public class validator {
     private row[] row_array;
     private int row_perm[][];
     private double length;
+    private int height;
     
    
-    public validator(row[] al1, int[][] r1, double l){
+    public validator(row[] al1, int[][] r1, double l, int h){
         row_array = al1;
         row_perm = r1;
         length = l;
+        height = h;
 }
     public validator(row[] al1, double l){
         row_array = al1;
@@ -36,28 +38,20 @@ public class validator {
      * 
      * @param row permutation of rows to check
      */
-    public boolean validate_all(int row_perm_to_check, int height){        
-        // TODO: Get row indices where height correct!
-        int rows[] = new int[height];
-        int rows_index = 0;             // Used for adding indexs to rows
-        
-        // Add rows to rows[] based on row_perm_to_check
-        for (int index = 0; index < height; index++){
-            if (row_perm[row_perm_to_check][index] == 1){
-                rows[rows_index] = index;
-                rows_index++;
-            }
-        }
-        /* Now we should have an array containing the indexes of only the 
-         rows to check */
-        
+    public boolean validate_all(int row_perm_to_check){
+	int temp[] = row_perm[row_perm_to_check];
+                
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){
-            if ( validate_two(index-1,index) ){
-                // Continue
+            System.out.println("perm"+(index-1));
+            
+            // Send indexes of 2 rows to check from the current perm
+            if ( validate_two(temp[index-1],temp[index]) == true ){
+                //System.out.println("true");
             }
             // Otherwise Exit
             else{
+                //System.out.println("false");
                 return false;
             }
         }
@@ -77,6 +71,17 @@ public class validator {
      private boolean validate_two(int index1, int index2){
         boolean cont = true;
         
+        // Length of Both!
+        if(!test_length(index1)){
+            System.out.println("index1 bad length"+index1);
+            return false;
+		}
+        if(!test_length(index2)){
+            System.out.println("index2 bad length");
+            return false;
+        }
+        System.out.println("good length");
+        
         row row1 = row_array[index1]; 
         row row2 = row_array[index2];
         
@@ -85,9 +90,9 @@ public class validator {
         
         hash1.addAll(row1.get_hash());
         hash2.addAll(row2.get_hash());
-
+        
         // for loop to see if one contains an element of the other
-        for (int index = 0; index < row1.get_row_size(); index++){
+        for (int index = 0; index < hash1.size(); index++){
             // if one does, then the bricks lineup and set is invalid
             if (hash1.contains(hash2.get(index))){
                 return false;
@@ -97,7 +102,12 @@ public class validator {
         return true;
     }
      
+     /**
+      * test if length is correct!
+      * @param index row to check
+      * @return if match or not
+      */
      public boolean test_length(int index){
-         return ( row_array[index].get_row_length() == length);
+         return ( row_array[index].get_row_size() == length);
      }
 }

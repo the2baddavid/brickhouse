@@ -11,10 +11,11 @@ public class row {
     private ArrayList sum_hash = new ArrayList();
     
     public row(double input[], double row_length, int array_length){
-        my_row_length = row_length;
         my_row = input;
-        my_row_length = array_length;
+        my_array_length = my_row.length;
+        my_row_length = get_row_length();
         System.arraycopy(input, 0, my_row, 0, my_array_length);
+        set_hash();
     }
     
     public double[] get_row(){
@@ -33,9 +34,9 @@ public class row {
      * Sums contents of Array, and returns answer
      * @return 
      */
-    public double get_row_length(){
+    private double get_row_length(){
         double sum = 0;
-        for (int index = 0; index < my_row_length; index++){
+        for (int index = 0; index < my_array_length; index++){
             sum += my_row[index];
         }
         return sum;
@@ -48,7 +49,7 @@ public class row {
     public void set_hash(){
         double sum = 0;
         
-        for(int index = 1; index < my_row_length; index++){
+        for(int index = 0; index < my_array_length; index++){
             sum += my_row[index];
             sum_hash.add(sum);
         }

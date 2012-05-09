@@ -16,6 +16,7 @@ public class number_counter_test {
     int row_number;
     double length = 2;
     number_counter row_create;
+    row_counter rower;
     double brick1 = 3;
     double brick2 = 4.5;
     
@@ -70,7 +71,7 @@ public class number_counter_test {
     public void convert_type_test(){
         String input = "01011";
         int expected[] = {0,1,0,1,1};
-        int result[] = row_create.convert_type(input,input.length());
+        int result[] = rower.convert_type(input,input.length());
         
         assertArrayEquals(expected, result);        
     }
@@ -80,7 +81,7 @@ public class number_counter_test {
         // length =2
         // base =2 
         int expected[][] = {{0,0},{0,1},{1,0},{1,1}};
-        int result[][] = row_create.roper(2,2);
+        int result[][] = rower.roper(2,2);
         
         for(int index = 0; index < 4; index++){
             assertArrayEquals(expected, result);

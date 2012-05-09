@@ -13,9 +13,6 @@ public class row_counter {
      *
      */    
     
-    double brick1;
-    double brick2;
-    
     /**
      * Used for creating rows
      */
@@ -35,7 +32,7 @@ public class row_counter {
         for(int before = 0; before < amount;before++){
             String temp_string = convert_base(before,base);
             output[before] = convert_type(temp_string, length);
-            printit(output[before],length); // for debugging
+            //printit(output[before],length); // for debugging
         }
         
         return output;

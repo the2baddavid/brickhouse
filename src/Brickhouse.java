@@ -24,8 +24,6 @@ Send the source code and let us know the value that your program computes, your 
 running time, and the kind of machine on which you ran it.
  */
 
-import java.util.ArrayList;
-
 /** 
  * 
  * @author david
@@ -49,6 +47,7 @@ public class Brickhouse {
 
     static double brick1 = 3;
     static double brick2 = 4.5;
+    static int base = 2;
     
     public static void main(String[] args) {
        
@@ -66,7 +65,7 @@ public class Brickhouse {
         
         // Create Permutations or Rows
         number_counter row_create = new number_counter(brick1, brick2);
-        row_array = row_create.row_generator((int)length,2);
+        row_array = row_create.row_generator(length,2);
         row_number = row_array.length;
                 
         // Find permutations of Row Cominations, if Height > 1
@@ -75,15 +74,15 @@ public class Brickhouse {
             //  Create Counter to Create All Perms of Row Combinations
             row_counter roper = new row_counter();
             row_perm = roper.roper((int)height,row_number);
-            row_perm_index = roper.get_starting_size((int)height,row_number);
+            row_perm_index = row_perm.length;
             
             // Create Validator Object to Pass All Row Perms to
-            validator validate = new validator(row_array,row_perm,length);
+            validator validate = new validator(row_array,row_perm,length,(int)height);
             
             // Check All Row Perms and ...
-            for(int index = 1; index < row_perm_index; index++){
+            for(int index = 0; index < row_perm_index; index++){
                 //Increment Correct when Valid
-                if (validate.validate_all(index,(int)height)){
+                if (validate.validate_all(index)){
                     correct ++;
                 }
             }
@@ -101,7 +100,7 @@ public class Brickhouse {
         count.end();
         runtime = count.runTime();
         
-        System.out.println("Number of Correct Answers:"+correct);
-        System.out.println("Run Time:"+runtime+" ms");
+        System.out.print(correct);
+        //System.out.println("Run Time:"+runtime+" ms");
     }
 }

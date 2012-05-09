@@ -32,8 +32,8 @@ public class number_counter{
     }
     
     
-    public row[] row_generator(int len, int base){
-        int amount = (int)Math.pow(base, len);
+    public row[] row_generator(double len, int base){
+        int amount = (int)Math.pow(base, (int)len/brick1+1);
         row output[]; 
         
         // Test if length is greater than the sum, true do normal op
@@ -41,22 +41,22 @@ public class number_counter{
             output = new row[amount];
 
             for(int before = 0; before < amount; before++){
-                System.out.println("before"+before);
+                //System.out.println("before"+before);
 
                 //Convert number:base10 to base2
                 String temp_string = convert_base(before,base);
-                System.out.println("base conversion:"+temp_string);
+                //System.out.println("base conversion:"+temp_string);
 
                 //take output(String) and convert to double[]
                 double temp_num[] = convert_amount_and_type(temp_string);
-                printit(temp_num, temp_num.length);
+                //printit(temp_num, temp_num.length);
 
                 //create new row object to hold double[]
                 row temp_row = new row(temp_num,len,temp_num.length);
 
                 //copy new object in array of objects if correct length
                 output[before]=temp_row;
-                System.out.println(temp_row.get_row());
+                //System.out.println(temp_row.get_row());
             }
         }
 
@@ -136,7 +136,7 @@ public class number_counter{
     public static void printit(ArrayList input, int size){
 
         for (int index=0;index < size;index++)
-                System.out.print(input.get(index));
+            System.out.print(input.get(index));
         System.out.print("\n");
     }
     
@@ -148,7 +148,7 @@ public class number_counter{
     public static void printit(double input[], int size){
 
         for (int index=0;index < size;index++)
-                System.out.print(input[index]);
+            System.out.print(input[index]);
         System.out.print("\n");
     }
     
