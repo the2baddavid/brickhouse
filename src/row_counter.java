@@ -49,7 +49,7 @@ public class row_counter {
      * @return string containing conversion
      */
     public String convert_base(int number, int base){
-        if (number > 1){
+        if (number > 0){
                 return convert_base(number/base,base) + "" +number%base;
         }
         else{
