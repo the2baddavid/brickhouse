@@ -4,8 +4,8 @@
  */
 
 import java.util.ArrayList;
-import org.junit.*;
 import static org.junit.Assert.*;
+import org.junit.*;
 
 /**
  *
@@ -71,10 +71,12 @@ public class row_test {
     
     public void test_get_hash(){
         String input = null;
-        ArrayList expected[];
+        double expected[] = {  3, 6, 10.5, 13.5 };
         ArrayList result = test_object.get_hash();
         
         // TODO: Create Hash Test
-        //assertEquals(expected, result, .0001);
+        for(int index = 0; index < array_length; index++){
+            assertTrue(result.contains(new Double(expected[index])));
+        }
     }
 }
