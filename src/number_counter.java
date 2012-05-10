@@ -41,24 +41,35 @@ public class number_counter{
         
         if ( len > (brick1+brick2)){
             output = new row[amount];
+            
+            // Test for special case of row consisting of only brick1's,
+            // but many of them
+            if (len%brick1 == 0){
+                int times = (int) (len/brick1);
+                double temp[] = new double[times];
+                
+                // Put case into double[]
+                for (int i =0 ; i<times; i++){
+                    temp[i] = brick1;
+                }
+                // Create Row to hold info and push into Row[]
+                row temp1 = new row(temp,len,times);
+                output[0] = temp1;
+            }
 
             for(int before = 0; before < amount; before++){
-                //System.out.println("before"+before);
 
                 //Convert number:base10 to base2
                 String temp_string = convert_base(before,base);
-                //System.out.println("base conversion:"+temp_string);
 
                 //take output(String) and convert to double[]
                 double temp_num[] = convert_amount_and_type(temp_string);
-                //printit(temp_num, temp_num.length);
 
                 //create new row object to hold double[]
                 row temp_row = new row(temp_num,len,temp_num.length);
 
                 //copy new object in array of objects if correct length
                 output[before]=temp_row;
-                //System.out.println(temp_row.get_row());
             }
         }
 
