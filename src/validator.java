@@ -88,11 +88,10 @@ public class validator {
         hash2.addAll(row2.get_hash());
         
         // for loop to see if one contains an element of the other
-        // however, the end must be ignored of course
         int count =0;
-        for (int index = hash1.size()-1; index >= 0 ; index--){
+        for (int index = 0; index < hash1.size() ; index++){
             // if one does, then the bricks lineup and set is invalid
-            if (hash1.contains(hash2.get(index))){
+            if (hash2.contains(hash1.get(index))){
                 count++;
             }
         }
