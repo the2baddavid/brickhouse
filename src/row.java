@@ -13,7 +13,7 @@ public class row {
     public row(double input[], double row_length, int array_length){
         my_row = input;
         my_array_length = my_row.length;
-        my_row_length = get_row_length();
+        my_row_length = get_row_sum();
         System.arraycopy(input, 0, my_row, 0, my_array_length);
         set_hash();
     }
@@ -34,7 +34,7 @@ public class row {
      * Sums contents of Array, and returns answer
      * @return 
      */
-    private double get_row_length(){
+    private double get_row_sum(){
         double sum = 0;
         for (int index = 0; index < my_array_length; index++){
             sum += my_row[index];
@@ -42,7 +42,7 @@ public class row {
         return sum;
     }
     
-    public double get_row_size(){
+    public double get_row_length(){
         return my_row_length;
     }
     

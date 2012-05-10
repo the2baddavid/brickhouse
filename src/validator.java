@@ -111,6 +111,6 @@ public class validator {
       * @return if match or not
       */
      public boolean test_length(int index){
-         return ( row_array[index].get_row_size() == length);
+         return ( row_array[index].get_row_length() == length);
      }
 }

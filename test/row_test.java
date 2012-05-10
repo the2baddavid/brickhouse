@@ -70,7 +70,7 @@ public class row_test {
     public void test_get_row_size(){
         String input = null;
         double expected = row_length;
-        double result = test_object.get_row_size();
+        double result = test_object.get_row_length();
         
         assertEquals(expected, result, .0001);        
     }
@@ -79,7 +79,7 @@ public class row_test {
     public void test_get_row_length(){
         String input = null;
         double expected = row_length;
-        double result = test_object.get_row_size();
+        double result = test_object.get_row_length();
         
         assertEquals(expected, result, .0001);
     }
