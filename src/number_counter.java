@@ -48,6 +48,7 @@ public class number_counter{
 		}
 		
 		output = new row[counter];
+                final_size = counter;
 		
 		for(int index =0; index < counter; index++){
 			output[index] = temp[index];			
