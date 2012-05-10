@@ -28,6 +28,7 @@ public class row_counter {
     public int[][] roper(int height,int rows){
         int amount = (int)Math.pow(rows, height);
         int output[][] = new int[amount][height];
+        output[0][0] = 0;
         
         // starting point
         
@@ -50,7 +51,7 @@ public class row_counter {
      */
     public String convert_base(int number, int base){
         if (number > 0){
-                return convert_base(number/base,base) + "" +number%base;
+                return convert_base(number/base,base) + "-" +number%base;
         }
         else{
                 return "";
@@ -64,13 +65,15 @@ public class row_counter {
      * @param input
      * @return 
      */
-    public int[] convert_type(String input,int len){
-        int size = input.length();
+    static int[] convert_type(String input,int len){
+        String token[];
+       
+        token = input.split("-");
+        int size = token.length-1;
         int output[] = new int[len];
         
-        for(int index = 0;index < size; index++){
-            String temp = input.charAt(index)+"";
-            output[index+(len-size)] = Integer.parseInt(temp);
+        for(int index = 1;index < token.length; index++){
+            output[index-1+(len-size)] = Integer.parseInt(token[index]);
         }
         
         return output;

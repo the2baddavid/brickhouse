@@ -60,8 +60,9 @@ public class Brickhouse {
         double runtime;
         
         // Set Input
-        height = Double.parseDouble(args[1]);
         length = Double.parseDouble(args[0]);
+        height = Double.parseDouble(args[1]);
+        
         
         // Create Permutations or Rows
         number_counter row_create = new number_counter(brick1, brick2);

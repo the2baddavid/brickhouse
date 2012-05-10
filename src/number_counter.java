@@ -37,6 +37,8 @@ public class number_counter{
         row output[]; 
         
         // Test if length is greater than the sum, true do normal op
+        // Add Condition of {0},{0,0},{0,0,0}... 
+        
         if ( len > (brick1+brick2)){
             output = new row[amount];
 
