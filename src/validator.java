@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class validator {
     //TODO: Add Private Fields
     private row[] row_array;
-    private int row_perm[][];
+    private byte row_perm[][];
     private double length;
     private int height;
     
    
-    public validator(row[] al1, int[][] r1, double l, int h){
+    public validator(row[] al1, byte[][] r1, double l, int h){
         row_array = al1;
         row_perm = r1;
         length = l;
@@ -39,7 +39,7 @@ public class validator {
      * @param row permutation of rows to check
      */
     public boolean validate_all(int row_perm_to_check){
-	int temp[] = row_perm[row_perm_to_check];
+	byte temp[] = row_perm[row_perm_to_check];
                         
         // While Still Possible to be a valid row, continue
         for(int index = 1; index < height; index++){

@@ -70,8 +70,8 @@ public class number_counter_test {
     @Test
     public void convert_type_test(){
         String input = "01011";
-        int expected[] = {0,1,0,1,1};
-        int result[] = rower.convert_type(input,input.length());
+        byte expected[] = {0,1,0,1,1};
+        byte result[] = rower.convert_type(input,input.length());
         
         assertArrayEquals(expected, result);        
     }
@@ -80,8 +80,8 @@ public class number_counter_test {
     public void roper_test(){
         // length =2
         // base =2 
-        int expected[][] = {{0,0},{0,1},{1,0},{1,1}};
-        int result[][] = rower.roper(2,2);
+        byte expected[][] = {{0,0},{0,1},{1,0},{1,1}};
+        byte result[][] = rower.roper(2,2);
         
         for(int index = 0; index < 4; index++){
             assertArrayEquals(expected, result);

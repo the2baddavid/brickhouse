@@ -25,9 +25,9 @@ public class row_counter {
      * @param base
      * @return 
      */
-    public int[][] roper(int height,int rows){
+    public byte[][] roper(int height,int rows){
         int amount = (int)Math.pow(rows, height);
-        int output[][] = new int[amount][height];
+        byte output[][] = new byte[amount][height];
         output[0][0] = 0;
         
         // starting point
@@ -65,15 +65,15 @@ public class row_counter {
      * @param input
      * @return 
      */
-    static int[] convert_type(String input,int len){
+    static byte[] convert_type(String input,int len){
         String token[];
        
         token = input.split("-");
         int size = token.length-1;
-        int output[] = new int[len];
+        byte output[] = new byte[len];
         
         for(int index = 1;index < token.length; index++){
-            output[index-1+(len-size)] = Integer.parseInt(token[index]);
+            output[index-1+(len-size)] = Byte.parseByte(token[index]);
         }
         
         return output;

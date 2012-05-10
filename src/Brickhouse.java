@@ -43,7 +43,7 @@ public class Brickhouse {
     static row row_array[];
     
     static int row_perm_index = 0;
-    static int row_perm[][];
+    static byte row_perm[][];
 
     static double brick1 = 3;
     static double brick2 = 4.5;
