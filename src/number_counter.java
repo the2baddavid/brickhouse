@@ -41,21 +41,6 @@ public class number_counter{
         
         if ( len > (brick1+brick2)){
             output = new row[amount];
-            
-            // Test for special case of row consisting of only brick1's,
-            // but many of them
-            if (len%brick1 == 0){
-                int times = (int) (len/brick1);
-                double temp[] = new double[times];
-                
-                // Put case into double[]
-                for (int i =0 ; i<times; i++){
-                    temp[i] = brick1;
-                }
-                // Create Row to hold info and push into Row[]
-                row temp1 = new row(temp,len,times);
-                output[0] = temp1;
-            }
 
             for(int before = 0; before < amount; before++){
 
@@ -70,6 +55,21 @@ public class number_counter{
 
                 //copy new object in array of objects if correct length
                 output[before]=temp_row;
+            }
+            
+            // Test for special case of row consisting of only brick1's,
+            // but many of them
+            if (len%brick1 == 0){
+                int times = (int) (len/brick1);
+                double temp[] = new double[times];
+                
+                // Put case into double[]
+                for (int i =0 ; i<times; i++){
+                    temp[i] = brick1;
+                }
+                // Create Row to hold info and push into Row[]
+                row temp1 = new row(temp,len,times);
+                output[0] = temp1;
             }
         }
 

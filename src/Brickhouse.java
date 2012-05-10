@@ -102,6 +102,6 @@ public class Brickhouse {
         runtime = count.runTime();
         
         System.out.print((long)correct);
-        //System.out.println("Run Time:"+runtime+" ms");
+        System.out.println("\nRun Time:"+runtime+" ms");
     }
 }
