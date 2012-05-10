@@ -19,7 +19,7 @@ public class number_counter{
     
     double brick1;
     double brick2;
-
+    int final_size;
     
     /**
      * Used for creating bricks
@@ -31,7 +31,34 @@ public class number_counter{
         brick2 = b2;
     }
     
+    public row[] driver(double len, int base){
+		return row_shrinker( row_generator( len, base), len);
+	}
     
+    public row[] row_shrinker(row[] input, double length_to_test){
+		row temp[] = new row[input.length];
+		row output[];
+		int counter=0;
+		
+		for(int index =0; index < input.length; index++){
+			if ( input[index].get_row_length() == length_to_test){
+				temp[counter] = input[index];
+				counter++;
+			}
+		}
+		
+		output = new row[counter];
+		
+		for(int index =0; index < counter; index++){
+			output[index] = temp[index];			
+		}
+		return output;
+	}    
+	
+	public int get_shrunk_size(){
+		return final_size;
+	}
+	    
     public row[] row_generator(double len, int base){
         int amount = (int)Math.pow(base, (int)len/brick1+1);
         row output[]; 
@@ -79,21 +106,8 @@ public class number_counter{
             double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
 
             for (int index = 0;index < 6; index++){
-
-            /*	System.out.print("before:");
-                    printit(temp_num[index],temp_num[index].length);
-                    System.out.println(temp_num[index].length); */
-
-                    row temp_row = new row(temp_num[index],len,temp_num[index].length);
-
-            /*	System.out.print("temp:");
-                    printit(temp_row.get_row(),temp_num[index].length); */
-
-                    output[index] = temp_row;
-
-            /*	System.out.print("after:");
-                    printit(output[index].get_row(),temp_num[index].length); 
-                    System.out.println( "length"+temp_row.get_row_length() );	// for debugging	*/
+				row temp_row = new row(temp_num[index],len,temp_num[index].length);
+				output[index] = temp_row;
             }
         }
         return output;

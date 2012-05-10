@@ -66,7 +66,7 @@ public class Brickhouse {
         
         // Create Permutations or Rows
         number_counter row_create = new number_counter(brick1, brick2);
-        row_array = row_create.row_generator(length,2);
+        row_array = row_create.driver(length,2);
         row_number = row_array.length;
                 
         // Find permutations of Row Cominations, if Height > 1
