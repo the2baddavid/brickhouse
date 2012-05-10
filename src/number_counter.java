@@ -32,7 +32,11 @@ public class number_counter{
     }
     
     public row[] driver(double len, int base){
+        // Shrinker might be throwing off the prebuilt results...
+            if ( len > (brick1+brick2))
 		return row_shrinker( row_generator( len, base), len);
+            else
+                return row_generator(len,base);
 	}
     
     public row[] row_shrinker(row[] input, double length_to_test){
@@ -41,10 +45,22 @@ public class number_counter{
 		int counter=0;
 		
 		for(int index =0; index < input.length; index++){
+                    // Normal Running Condition
 			if ( input[index].get_row_length() == length_to_test){
-				temp[counter] = input[index];
-				counter++;
+                            temp[counter] = input[index];
+                            counter++;
 			}
+                    // Case of Having Brick1 leading, which isn't normally generated
+                    // due to brick1 taking the place of the 0 in the generator
+                        else if (input[index].get_row_length()+brick1 == length_to_test){
+                            double[] temp_double = new double[1+input[index].get_array_length()];
+                            temp_double[0] = brick1;
+                            System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
+                            row temp_row = new row(temp_double, length_to_test,temp_double.length);
+                            
+                            temp[counter] = temp_row;
+                            counter++;
+                        }
 		}
 		
 		output = new row[counter];
