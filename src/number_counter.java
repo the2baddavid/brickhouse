@@ -58,22 +58,22 @@ public class number_counter{
         int counter=0;
 
         for(int index =0; index < input.length; index++){
-            // Normal Running Condition
-                if ( input[index].get_row_length() == length_to_test){
-                    temp[counter] = input[index];
-                    counter++;
-                }
-            // Case of Having Brick1 leading, which isn't normally generated
-            // due to brick1 taking the place of the 0 in the generator
-                else if (input[index].get_row_length()+brick1 == length_to_test){
-                    double[] temp_double = new double[1+input[index].get_array_length()];
-                    temp_double[0] = brick1;
-                    System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
-                    row temp_row = new row(temp_double, length_to_test,temp_double.length);
+        // Normal Running Condition
+            if ( input[index].get_row_length() == length_to_test){
+                temp[counter] = input[index];
+                counter++;
+            }
+        // Case of Having Brick1 leading, which isn't normally generated
+        // due to brick1 taking the place of the 0 in the generator
+            else if (input[index].get_row_length()+brick1 == length_to_test){
+                double[] temp_double = new double[1+input[index].get_array_length()];
+                temp_double[0] = brick1;
+                System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
+                row temp_row = new row(temp_double, length_to_test,temp_double.length);
 
-                    temp[counter] = temp_row;
-                    counter++;
-                }
+                temp[counter] = temp_row;
+                counter++;
+            }
         }
 
         output = new row[counter];
@@ -142,13 +142,29 @@ public class number_counter{
                 output[0] = temp1;
             }
         }
-
+        
+        //Check if length equals brick1
+        else if( len == brick1){
+            output = new row[1];
+            double temp_num[][] = {{brick1}};
+            row temp_row = new row(temp_num[0],len,temp_num[0].length);
+            output[0] = temp_row;
+        }
+        
+        //Check if length equals brick2
+        else if( len == brick2){
+            output = new row[1];
+            double temp_num[][] = {{brick2}};
+            row temp_row = new row(temp_num[0],len,temp_num[0].length);
+            output[0] = temp_row;
+        }
+        
         // Otherwise use prebuilt set of potentials
         else{
-            output = new row[6];			
-            double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
+            output = new row[4];			
+            double temp_num[][] = {{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
 
-            for (int index = 0;index < 6; index++){
+            for (int index = 0;index < 4; index++){
                 row temp_row = new row(temp_num[index],len,temp_num[index].length);
                 output[index] = temp_row;
             }
