@@ -141,24 +141,13 @@ public class validator {
             // if one does, then the bricks lineup and set is invalid
             if (hash2.contains(hash1.get(index))){
                 count++;
+                
+                // if at any point the count is greater than 1, then the row is invalid
+                if (count > 1){
+                    return false;
+                }
             }
         }
-        
-        // check hash1 for elements in hash2
-        for (int index = 0; index < hash2.size() ; index++){
-            // if one does, then the bricks lineup and set is invalid
-            if (hash1.contains(hash2.get(index))){
-                count++;
-            }
-        }
-        
-        // Unless there are only 2 collisions, either the rows are wrong length
-        // or they line up on the same brick
-        if (count != 2){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return true;
     }
 }
