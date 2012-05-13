@@ -27,37 +27,7 @@ public class number_counter{
     public number_counter(double b1, double b2){
         brick1 = b1;
         brick2 = b2;
-    }
-    
-    /**
-     * Shrink takes the array of row objects, and then copies into a temp array
-     * only the rows that have the correct length.  Then temp array with the
-     * good rows is then returned.
-     * 
-     * @param input
-     * @param length_to_test
-     * @return 
-     */
-    public row[] row_shrinker(row[] input, double length_to_test){
-        row temp[] = new row[input.length];
-        row output[];
-        int counter=0;
-
-        for(int index =0; index < input.length; index++){
-        // Normal Running Condition
-            if ( input[index].get_row_length() == length_to_test){
-                temp[counter] = input[index];
-                counter++;
-            }
-        }
-
-        output = new row[counter];
-        final_size = counter;
-
-        System.arraycopy(temp,0,output,0,counter);
-        
-        return output;
-    }    
+    }   
 
     /**
         * Get the final size, which is the size of the array after it has been
@@ -86,69 +56,40 @@ public class number_counter{
         row output[];
         int size = 0;
         
-        // Test if length is greater than the sum, then do normal op
-        
-        if ( len > (brick1+brick2)){
-            int start = (int) (len / brick2);
-            int end = (int) (len / brick1);
-            
-            if (len%brick1 != 0){   // make sure we dont miss anything!
-                end ++;
-            }
-            
-            // --   MAIN GENERATOR  --  For General Use
-            // for loop creates all possibilities of a certain length, with the
-            // length increasing from the minimux possible length, to the max
-            for(int index = start; index <= end; index++){
-                int max = (int) Math.pow(2,index);
-                // for each length from index1 from min to max, count 0 to max
-                for( int index2 = 0; index2 < max ; index2++ ){
-                    // Create and set temp variables
-                    String temp_string = convert_base(index2, 2);
-                    double temp_double[] = convert_amount_and_type(temp_string, index);
-                    row temp_row = new row(temp_double, len,temp_double.length);
-                    
-                    // Copy New Row into Temp Holder for later, and iterate size if correct length
-                    if (temp_row.get_row_length() == len){
-                        temp[size] = temp_row;
-                        size++;
-                    }
-                }                
-            }
-            
-            // Copy temp array into final for returning
-            output = new row[size];
-            final_size = size;
-            System.arraycopy(temp, 0, output, 0, size);
-        }
-        
-        //Check if length equals brick1
-        else if( len == brick1){
-            output = new row[1];
-            double temp_num[][] = {{brick1}};
-            row temp_row = new row(temp_num[0],len,temp_num[0].length);
-            output[0] = temp_row;
-        }
-        
-        //Check if length equals brick2
-        else if( len == brick2){
-            output = new row[1];
-            double temp_num[][] = {{brick2}};
-            row temp_row = new row(temp_num[0],len,temp_num[0].length);
-            output[0] = temp_row;
-        }
-        
-        // Otherwise use prebuilt set of potentials
-        else{
-            output = new row[4];			
-            double temp_num[][] = {{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
+        int start = (int) (len / brick2);
+        int end = (int) (len / brick1);
 
-            for (int index = 0;index < 4; index++){
-                row temp_row = new row(temp_num[index],len,temp_num[index].length);
-                output[index] = temp_row;
-            }
-            return row_shrinker(output, len);
+        if (len%brick1 != 0){   // make sure we dont miss anything!
+            end ++;
         }
+
+        // --   MAIN GENERATOR  --  For General Use
+        // for loop creates all possibilities of a certain length, with the
+        // length increasing from the minimux possible length, to the max
+        for(int index = start; index <= end; index++){
+            int max = (int) Math.pow(2,index);
+            
+            // for each length from index1 from min to max, count 0 to max
+            for( int index2 = 0; index2 < max ; index2++ ){
+                
+                // Create and set temp variables
+                String temp_string = convert_base(index2, 2);
+                double temp_double[] = convert_amount_and_type(temp_string, index);
+                row temp_row = new row(temp_double, len,temp_double.length);
+
+                // Copy New Row into Temp Holder for later, and iterate size if correct length
+                if (temp_row.get_row_length() == len){
+                    temp[size] = temp_row;
+                    size++;
+                }
+            }                
+        }
+
+        // Copy temp array into final for returning
+        output = new row[size];
+        final_size = size;
+        System.arraycopy(temp, 0, output, 0, size);
+        
         return output;
     }
     
