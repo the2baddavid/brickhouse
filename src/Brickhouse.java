@@ -56,7 +56,6 @@ public class Brickhouse {
         
         // variables to return
         long correct = 0;
-        double runtime;
         
         // Set Input
         length = Double.parseDouble(args[0]);
@@ -78,7 +77,7 @@ public class Brickhouse {
         // Find which rows can follow which, if Height > 1
         if (height > 1){
             // Create Validator Object to Pass All Row Perms to
-            validator validate = new validator(row_array,length,(int)height);
+            validator validate = new validator(row_array,(int)height);
             validate.validate_all();
             
             // Now that the correct following rows are known, find the number

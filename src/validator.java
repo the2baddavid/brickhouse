@@ -1,27 +1,52 @@
-// Fix all output
 import java.util.ArrayList;
 
-/*
- * TODO: Test the 2 row checking
- 
- * TODO: Fix validation functions
-*/
+/*****************************  Validator   ************************************
+********************************************************************************
+ * Validator is used to attain correct number of possible sets, by knowing the
+ * number of valid rows, which rows can follow them, and what the desired height
+ * of the puzzle is.
+ * 
+ * ~~~~~~~ Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * row[] row_array - holds all of the rows of correct length
+ * height - the height of the puzzle
+ * 
+ * ~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * validator() - constructor, that simply copies the height and the rows in
+ * 
+ * height handler - loops through each row, passing it into the new_roper
+ * function, which will use height for how often to recurse.  The loop also sums
+ * all the returned answers, which are the number of possible solutions.
+ * 
+ * new_roper() - Function that recurses based on height.  The function 
+ * returns the number of possible solutions for each row, which is multiplied
+ * by the number each respective row has of possible solutions based on the row
+ * number.
+ * 
+ * validate_all() - Purpose of the function is to find out which rows can
+ * legally follow a given row.  The function does this by way of calling the
+ * validate_two function and tracking the results.  It then takes the results
+ * and copies them into each respective row for use by the new_roper function.
+ * 
+ * validate_two() - Function takes in two indexes, which belong to rows in the
+ * row array.  The function then pulls each of their respective hashes that
+ * contain the brick sums in them and checks for collisions, with only one being
+ * allowed which will be the row length.
+ * 
+ * 
+*******************************************************************************/
 
 /**
- *
+ * Used for attaining number of correct responses
  * @author david
  */
 public class validator {
-    //TODO: Add Private Fields
+    
     private row[] row_array;
     private int height;
    
-    public validator(row[] al1, double l, int h){
+    public validator(row[] al1, int h){
         row_array = al1;
         height = h;
-}
-    public validator(row[] al1, double l){
-        row_array = al1;
 }
     
     public int height_handler(){
@@ -46,8 +71,8 @@ public class validator {
         int num_matches = row_array[row_index].get_match_length();
         int matches[] = row_array[row_index].get_matches();
         
-        if (height > 1){
-            int temp =0;
+        if (height > 2){
+            int temp = 0;
             for(int index=0; index < num_matches; index++){
                 temp += new_roper(height-1, matches[index])*num_matches;                
             }
@@ -85,6 +110,7 @@ public class validator {
             row_array[index1].set_matches(valid, valid_counter);
         }
     }
+    
     
     /**
      * Takes two arrays, and checks them for collisions in the sense of having
