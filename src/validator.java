@@ -14,48 +14,76 @@ import java.util.ArrayList;
 public class validator {
     //TODO: Add Private Fields
     private row[] row_array;
-    private byte row_perm[][];
-    private double length;
     private int height;
-    
    
-    public validator(row[] al1, byte[][] r1, double l, int h){
+    public validator(row[] al1, double l, int h){
         row_array = al1;
-        row_perm = r1;
-        length = l;
         height = h;
 }
     public validator(row[] al1, double l){
         row_array = al1;
-        length = l;
 }
     
+    public int height_handler(){
+        int temp = 0;
+        
+        for(int index = 0; index < row_array.length; index++){
+            temp += new_roper(height, index);
+        }       
+        
+        return temp;
+    }
+    
     /**
-     * Validate all the rows, using the validate two function for when there
-     * are more than two rows. Also needs to get proper rows based on perm
+     * Recursive function which should calculate all possible combinations of
+     * rows based on a given height
      * 
-     * TODO: Probably this function will give me trouble
-     * 
-     * @param row permutation of rows to check
+     * @param height
+     * @param row_index
+     * @return 
      */
-    public boolean validate_all(int row_perm_to_check){
-	byte temp[] = row_perm[row_perm_to_check];
-                        
-        // While Still Possible to be a valid row, continue
-        for(int index = 1; index < height; index++){
-                        
-            // Send indexes of 2 rows to check from the current perm
-            if ( validate_two(temp[index-1],temp[index]) == true ){
-                //System.out.println("true");
+    private int new_roper(int height, int row_index){
+        int num_matches = row_array[row_index].get_match_length();
+        int matches[] = row_array[row_index].get_matches();
+        
+        if (height > 1){
+            int temp =0;
+            for(int index=0; index < num_matches; index++){
+                temp += new_roper(height-1, matches[index])*num_matches;                
             }
-            // Otherwise Exit
-            else{
-                //System.out.println("false");
-                return false;
-            }
+            return temp;
         }
-        // If it makes it through, then it is valid
-        return true;
+        else{
+            return num_matches;
+        }
+    }
+    
+    
+    
+    /**
+     * for each row in row_array, find all valid rows that can follow it.  In
+     * other words, for row number 5 which rows can be below it, and store the
+     * matches in the row object.
+     * 
+     * @return void, as all the matches should be stored within the row objects
+     * in the row array
+     */
+    public void validate_all(){
+	
+        for (int index1 = 0; index1 < row_array.length; index1++){
+            
+            int valid[] = new int[row_array.length];
+            int valid_counter =0;
+            
+            for (int index2 = 0; index2 < row_array.length; index2++){
+                if (validate_two(index1,index2)){
+                    valid[valid_counter] = index2;
+                    valid_counter++;
+                }
+            }
+            
+            row_array[index1].set_matches(valid, valid_counter);
+        }
     }
     
     /**
@@ -63,21 +91,13 @@ public class validator {
      * two brick ends at the same spot, validates Two Rows as being compatible,
      * via an hash table.
      * 
-     * @param array1
-     * @param array2
+     * @param index of first array to match against
+     * @param index of second array to match against
      * @return whether the rows are valid together
      */
      private boolean validate_two(int index1, int index2){
         boolean cont = true;
         
-        // Length of Both!
-        if(!test_length(index1)){
-            return false;
-		}
-        if(!test_length(index2)){
-            return false;
-        }
-                
         row row1 = row_array[index1]; 
         row row2 = row_array[index2];
         
@@ -104,13 +124,4 @@ public class validator {
             return true;
         }
     }
-     
-     /**
-      * test if length is correct!
-      * @param index row to check
-      * @return if match or not
-      */
-     public boolean test_length(int index){
-         return ( row_array[index].get_row_length() == length);
-     }
 }

@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-
 /**
- * Creates ArrayList of Row Objects
+ * Creates Array of Row Objects
  * 
  * @author david
  */
@@ -31,6 +29,15 @@ public class number_counter{
         brick2 = b2;
     }
     
+    /**
+     * Driver is used to create Initial Array of Rows, then calls the shrink
+     * to remove the bad ones.  Lastly, the good ones are passed back to the
+     * main function
+     * 
+     * @param len
+     * @param base
+     * @return 
+     */
     public row[] driver(double len, int base){
         // Shrinker might be throwing off the prebuilt results...
             if ( len > (brick1+brick2))
@@ -39,43 +46,66 @@ public class number_counter{
                 return row_generator(len,base);
 	}
     
+    /**
+     * Shrink takes the array of row objects, and then copies into a temp array
+     * only the rows that have the correct length.  Then temp array with the
+     * good rows is then returned.
+     * 
+     * @param input
+     * @param length_to_test
+     * @return 
+     */
     public row[] row_shrinker(row[] input, double length_to_test){
-		row temp[] = new row[input.length];
-		row output[];
-		int counter=0;
-		
-		for(int index =0; index < input.length; index++){
-                    // Normal Running Condition
-			if ( input[index].get_row_length() == length_to_test){
-                            temp[counter] = input[index];
-                            counter++;
-			}
-                    // Case of Having Brick1 leading, which isn't normally generated
-                    // due to brick1 taking the place of the 0 in the generator
-                        else if (input[index].get_row_length()+brick1 == length_to_test){
-                            double[] temp_double = new double[1+input[index].get_array_length()];
-                            temp_double[0] = brick1;
-                            System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
-                            row temp_row = new row(temp_double, length_to_test,temp_double.length);
-                            
-                            temp[counter] = temp_row;
-                            counter++;
-                        }
-		}
-		
-		output = new row[counter];
-                final_size = counter;
-		
-		for(int index =0; index < counter; index++){
-			output[index] = temp[index];			
-		}
-		return output;
-	}    
-	
-	public int get_shrunk_size(){
-		return final_size;
-	}
-	    
+        row temp[] = new row[input.length];
+        row output[];
+        int counter=0;
+
+        for(int index =0; index < input.length; index++){
+            // Normal Running Condition
+                if ( input[index].get_row_length() == length_to_test){
+                    temp[counter] = input[index];
+                    counter++;
+                }
+            // Case of Having Brick1 leading, which isn't normally generated
+            // due to brick1 taking the place of the 0 in the generator
+                else if (input[index].get_row_length()+brick1 == length_to_test){
+                    double[] temp_double = new double[1+input[index].get_array_length()];
+                    temp_double[0] = brick1;
+                    System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
+                    row temp_row = new row(temp_double, length_to_test,temp_double.length);
+
+                    temp[counter] = temp_row;
+                    counter++;
+                }
+        }
+
+        output = new row[counter];
+        final_size = counter;
+
+        for(int index =0; index < counter; index++){
+                output[index] = temp[index];			
+        }
+        return output;
+    }    
+
+    /**
+        * Get the final size, which is the size of the array after it has been
+        * shrunk to only good inputs.
+        * 
+        * @return 
+        */
+    public int get_shrunk_size(){
+        return final_size;
+    }
+
+    /**
+     * generate array containing all possible rows, then return the array of
+     * of the row objects
+     * 
+     * @param len
+     * @param base
+     * @return 
+     */
     public row[] row_generator(double len, int base){
         int amount = (int)Math.pow(base, (int)len/brick1+1);
         row output[]; 
@@ -87,7 +117,6 @@ public class number_counter{
             output = new row[amount];
 
             for(int before = 0; before < amount; before++){
-
                 //Convert number:base10 to base2
                 String temp_string = convert_base(before,base);
 
@@ -117,20 +146,22 @@ public class number_counter{
             }
         }
 
-    // Otherwise use prebuilt set of potentials
-    else{
+        // Otherwise use prebuilt set of potentials
+        else{
             output = new row[6];			
             double temp_num[][] = {{brick1,0},{brick2,0},{brick1,brick1},{brick1,brick2},{brick2,brick1},{brick2,brick2}};
 
             for (int index = 0;index < 6; index++){
-				row temp_row = new row(temp_num[index],len,temp_num[index].length);
-				output[index] = temp_row;
+                row temp_row = new row(temp_num[index],len,temp_num[index].length);
+                output[index] = temp_row;
             }
         }
         return output;
     }
     
     /**
+     * Convert Base will take the number in base-10 that is given and will
+     * return a string containing the number in base-2
      * 
      * @param number
      * @param base
@@ -138,10 +169,10 @@ public class number_counter{
      */
     public String convert_base(int number, int base){
         if (number > 1){
-                return convert_base(number/base,base) + "" +number%base;
+            return convert_base(number/base,base) + "" +number%base;
         }
         else{
-                return number%base+"";
+            return number%base+"";
         }
     }
     
@@ -157,55 +188,16 @@ public class number_counter{
         double output[] = new double[size];
 
         for(int index = 0; index < size; index++){
-                double temp = (double)input.charAt(index);
-                if(temp == '0')
-                        temp = brick1;
-                else if (temp == '1')
-                        temp = brick2;
-                else
-                        temp = 0;
-                output[index] = temp;
+            double temp = (double)input.charAt(index);
+            if(temp == '0')
+                temp = brick1;
+            else if (temp == '1')
+                temp = brick2;
+            else
+                temp = 0;
+            output[index] = temp;
         }
 
         return output;
-    }
-    
-    
-    /**
-     * Row Gen -- Function prints to std out from a double[]
-     * 
-     * @param input
-     * @param size 
-     */
-    public static void printit(ArrayList input, int size){
-
-        for (int index=0;index < size;index++)
-            System.out.print(input.get(index));
-        System.out.print("\n");
-    }
-    
-    /**
-     * Mocked up for JUnit Testing...
-     * @param input
-     * @param size 
-     */
-    public static void printit(double input[], int size){
-
-        for (int index=0;index < size;index++)
-            System.out.print(input[index]);
-        System.out.print("\n");
-    }
-    
-    /**
-     * returns number of permutations using powers, base^length, however this
-     * will be more than the actual, as the actual will only have rows with
-     * the correct length, however makes a good starting point
-     * 
-     * @param length
-     * @param base
-     * @return 
-     */
-    public int get_starting_size(int length, int base){
-        return (int)Math.pow(base, length);
     }
 }

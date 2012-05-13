@@ -8,6 +8,7 @@ public class row {
     private double my_row[];
     private double my_row_length;
     private int my_array_length;
+    private int matches[];
     private ArrayList sum_hash = new ArrayList();
     
     public row(double input[], double row_length, int array_length){
@@ -55,11 +56,24 @@ public class row {
         
         for(int index = 0; index < my_array_length; index++){
             sum += my_row[index];
-            sum_hash.add(sum);
+            sum_hash.add(new Double(sum));
         }
     }
     
     public ArrayList get_hash(){
         return sum_hash;
+    }
+    
+    public void set_matches(int[] temp, int size){
+        matches = new int[size];
+        System.arraycopy(temp, 0, matches, 0, size);
+    }
+    
+    public int[] get_matches(){
+        return matches;
+    }
+    
+    public int get_match_length(){
+        return matches.length;
     }
 }

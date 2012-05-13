@@ -33,24 +33,22 @@ public class Brickhouse {
     /**
      * @param args the command line arguments
      */
-    static double height;
-    static double length;
     
-    static final int rowLength = 100;
-    static final int numberOfRows = 1000;
-    
-    static int row_number = 0;
-    static row row_array[];
-    
-    static int row_perm_index = 0;
-    static byte row_perm[][];
-
-    static double brick1 = 3;
-    static double brick2 = 4.5;
-    static int base = 2;
     
     public static void main(String[] args) {
-       
+        double height;
+        double length;
+
+        final int rowLength = 100;
+        final int numberOfRows = 1000;
+
+        int row_number = 0;
+        row row_array[];
+
+        double brick1 = 3;
+        double brick2 = 4.5;
+        int base = 2;
+                
         // Start Clock
         time_counter count = new time_counter();
         count.start();
@@ -63,45 +61,31 @@ public class Brickhouse {
         length = Double.parseDouble(args[0]);
         height = Double.parseDouble(args[1]);
         
-        
-        // Create Permutations or Rows
+        // Create Rows and Trim to Only Correct Ones
         number_counter row_create = new number_counter(brick1, brick2);
         row_array = row_create.driver(length,2);
         row_number = row_array.length;
                 
         // Find permutations of Row Cominations, if Height > 1
         if (height > 1){
-            
-            //  Create Counter to Create All Perms of Row Combinations
-            row_counter roper = new row_counter();
-            row_perm = roper.roper((int)height,row_number);
-            row_perm_index = row_perm.length;
-            
             // Create Validator Object to Pass All Row Perms to
-            validator validate = new validator(row_array,row_perm,length,(int)height);
+            validator validate = new validator(row_array,length,(int)height);
+            validate.validate_all();
             
-            // Check All Row Perms and ...
-            for(int index = 0; index < row_perm_index; index++){
-                //Increment Correct when Valid
-                if (validate.validate_all(index)){
-                    correct ++;
-                }
-            }
+            // Now that the correct following rows are known, find the number
+            // of possible correct sets
+            correct = validate.height_handler();            
         }
         // Otherwise, all rows of correct length are correct
         else{
-            validator validate = new validator(row_array,length);
-            for( int index = 0; index < row_number; index++){
-                if(validate.test_length(index))
-                    correct++;
-            }
+            correct = row_number;
         }
         
         // Get run time and finish up
         count.end();
         runtime = count.runTime();
         
-        System.out.print((long)correct);
+        System.out.print(correct);
         System.out.println("\nRun Time:"+runtime+" ms");
     }
 }
