@@ -39,7 +39,6 @@ public class number_counter{
      * @return 
      */
     public row[] driver(double len, int base){
-        // Shrinker might be throwing off the prebuilt results...
             return row_shrinker( row_generator( len, base), len);
 	}
     
@@ -63,25 +62,13 @@ public class number_counter{
                 temp[counter] = input[index];
                 counter++;
             }
-        // Case of Having Brick1 leading, which isn't normally generated
-        // due to brick1 taking the place of the 0 in the generator
-            else if (input[index].get_row_length()+brick1 == length_to_test){
-                double[] temp_double = new double[1+input[index].get_array_length()];
-                temp_double[0] = brick1;
-                System.arraycopy(input[index].get_row(), 0, temp_double, 1, input[index].get_array_length());
-                row temp_row = new row(temp_double, length_to_test,temp_double.length);
-
-                temp[counter] = temp_row;
-                counter++;
-            }
         }
 
         output = new row[counter];
         final_size = counter;
 
-        for(int index =0; index < counter; index++){
-                output[index] = temp[index];			
-        }
+        System.arraycopy(temp,0,output,0,counter);
+        
         return output;
     }    
 
@@ -104,43 +91,44 @@ public class number_counter{
      * @return 
      */
     public row[] row_generator(double len, int base){
+        // temp holding, and initial array size
         int amount = (int)Math.pow(base, (int)len/brick1+1);
-        row output[]; 
+        row temp[] = new row[amount];
+        
+        // final holding array and size iterator
+        row output[];
+        int size = 0;
         
         // Test if length is greater than the sum, then do normal op
-        // Add Condition of {0},{0,0},{0,0,0}... 
         
         if ( len > (brick1+brick2)){
-            output = new row[amount];
-
-            for(int before = 0; before < amount; before++){
-                //Convert number:base10 to base2
-                String temp_string = convert_base(before,base);
-
-                //take output(String) and convert to double[]
-                double temp_num[] = convert_amount_and_type(temp_string);
-
-                //create new row object to hold double[]
-                row temp_row = new row(temp_num,len,temp_num.length);
-
-                //copy new object in array of objects if correct length
-                output[before]=temp_row;
+            int start = (int) (len / brick2);
+            int end = (int) (len / brick1);
+            
+            if (len%brick1 != 0){   // make sure we dont miss anything!
+                end ++;
             }
             
-            // Test for special case of row consisting of only brick1's,
-            // but many of them
-            if (len%brick1 == 0){
-                int times = (int) (len/brick1);
-                double temp[] = new double[times];
-                
-                // Put case into double[]
-                for (int i =0 ; i<times; i++){
-                    temp[i] = brick1;
-                }
-                // Create Row to hold info and push into Row[]
-                row temp1 = new row(temp,len,times);
-                output[0] = temp1;
+            // --   MAIN GENERATOR  --  For General Use
+            // for loop creates all possibilities of a certain length, with the
+            // length increasing from the minimux possible length, to the max
+            for(int index = start; index <= end; index++){
+                int max = (int) Math.pow(2,index);
+                // for each length from index1 from min to max, count 0 to max
+                for( int index2 = 0; index2 < max ; index2++ ){
+                    // Create and set temp variables
+                    String temp_string = convert_base(index2, 2);
+                    double temp_double[] = convert_amount_and_type(temp_string, index);
+                    
+                    // Copy New Row into Temp Holder for later, and iterate size
+                    temp[size] = new row(temp_double, len,temp_double.length);
+                    size++;
+                }                
             }
+            
+            // Copy temp array into final for returning
+            output = new row[size];
+            System.arraycopy(temp, 0, output, 0, size);
         }
         
         //Check if length equals brick1
@@ -168,15 +156,13 @@ public class number_counter{
                 row temp_row = new row(temp_num[index],len,temp_num[index].length);
                 output[index] = temp_row;
             }
-            
-            
         }
         return output;
     }
     
     /**
      * Convert Base will take the number in base-10 that is given and will
-     * return a string containing the number in base-2
+     * return a string containing the number in specified base
      * 
      * @param number
      * @param base
@@ -193,24 +179,28 @@ public class number_counter{
     
     /**
      * Row gen -- For the instance of rows, the bricks are not lengths of 1 and 0, so
-     * this function will convert them to brick1 & brick2
+     * this function will convert them to brick1 & brick2. Also
      * 
      * @param input
      * @return 
      */
-    public double[] convert_amount_and_type(String input){
+    public double[] convert_amount_and_type(String input, int array_length){
         int size = input.length();
-        double output[] = new double[size];
+        double output[] = new double[array_length];
 
+        // initialize all values in output to brick1
+        for(int index = 0; index < array_length; index++){
+            output [ index ] = brick1;
+        }
+        
+        // then where brick2 is needed, change output to brick2
         for(int index = 0; index < size; index++){
             double temp = (double)input.charAt(index);
-            if(temp == '0')
-                temp = brick1;
-            else if (temp == '1')
+            
+            if (temp == '1'){
                 temp = brick2;
-            else
-                temp = 0;
-            output[index] = temp;
+                output[index + (array_length - size)] = temp;
+            }
         }
 
         return output;

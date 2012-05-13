@@ -40,26 +40,35 @@ public class Brickhouse {
 /******************************************************************************/
 /*************************   Let's get started   ******************************/
 /******************************************************************************/
-        
+        //  Structure Size
         double height;
         double length;
-
-        int row_number = 0;
-        row row_array[];
-
+        
+        // Brick Sizes -- Brick1 MUST be smaller!
         double brick1 = 3;
         double brick2 = 4.5;
+
+        // Row information
+        int row_number;
+        row row_array[];
                 
         // Start Clock
         time_counter count = new time_counter();
         count.start();
         
-        // variables to return
-        long correct = 0;
+        // Other Important Info
+        long correct;
+        
+        // Check number of args, print usage if wrong
+        if(args.length != 2){
+            System.out.println("usage: Brickhouse [length][height]");
+            System.exit(1);
+        }
         
         // Set Input
         length = Double.parseDouble(args[0]);
         height = Double.parseDouble(args[1]);
+        
         
 /******************************************************************************/ 
 /*****************************  Handle Length    ******************************/ 

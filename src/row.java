@@ -51,7 +51,7 @@ public class row {
         return my_array_length;
     }
     
-    public void set_hash(){
+    private void set_hash(){
         double sum = 0;
         
         for(int index = 0; index < my_array_length; index++){

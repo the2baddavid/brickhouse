@@ -71,6 +71,7 @@ public class validator {
         int num_matches = row_array[row_index].get_match_length();
         int matches[] = row_array[row_index].get_matches();
         
+        //TODO not sure if this needs to be 2 or 1
         if (height > 2){
             int temp = 0;
             for(int index=0; index < num_matches; index++){
@@ -142,8 +143,9 @@ public class validator {
             }
         }
         
-        // Should fix the false positive issue with ends
-        if (count > 1){
+        // Unless there is only 1 collision, either the rows are wrong length
+        // or they line up on the same brick
+        if (count != 1){
             return false;
         }
         else{
