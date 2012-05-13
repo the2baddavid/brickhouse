@@ -30,19 +30,6 @@ public class number_counter{
     }
     
     /**
-     * Driver is used to create Initial Array of Rows, then calls the shrink
-     * to remove the bad ones.  Lastly, the good ones are passed back to the
-     * main function
-     * 
-     * @param len
-     * @param base
-     * @return 
-     */
-    public row[] driver(double len, int base){
-            return row_shrinker( row_generator( len, base), len);
-	}
-    
-    /**
      * Shrink takes the array of row objects, and then copies into a temp array
      * only the rows that have the correct length.  Then temp array with the
      * good rows is then returned.
@@ -119,15 +106,19 @@ public class number_counter{
                     // Create and set temp variables
                     String temp_string = convert_base(index2, 2);
                     double temp_double[] = convert_amount_and_type(temp_string, index);
+                    row temp_row = new row(temp_double, len,temp_double.length);
                     
-                    // Copy New Row into Temp Holder for later, and iterate size
-                    temp[size] = new row(temp_double, len,temp_double.length);
-                    size++;
+                    // Copy New Row into Temp Holder for later, and iterate size if correct length
+                    if (temp_row.get_row_length() == len){
+                        temp[size] = temp_row;
+                        size++;
+                    }
                 }                
             }
             
             // Copy temp array into final for returning
             output = new row[size];
+            final_size = size;
             System.arraycopy(temp, 0, output, 0, size);
         }
         
@@ -156,6 +147,7 @@ public class number_counter{
                 row temp_row = new row(temp_num[index],len,temp_num[index].length);
                 output[index] = temp_row;
             }
+            return row_shrinker(output, len);
         }
         return output;
     }

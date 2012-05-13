@@ -134,7 +134,7 @@ public class validator {
         hash1.addAll(row1.get_hash());
         hash2.addAll(row2.get_hash());
         
-        // for loop to see if one contains an element of the other
+        // check hash2 for elements in hash1
         int count =0;
         for (int index = 0; index < hash1.size() ; index++){
             // if one does, then the bricks lineup and set is invalid
@@ -143,9 +143,17 @@ public class validator {
             }
         }
         
-        // Unless there is only 1 collision, either the rows are wrong length
+        // check hash1 for elements in hash2
+        for (int index = 0; index < hash2.size() ; index++){
+            // if one does, then the bricks lineup and set is invalid
+            if (hash1.contains(hash2.get(index))){
+                count++;
+            }
+        }
+        
+        // Unless there are only 2 collisions, either the rows are wrong length
         // or they line up on the same brick
-        if (count != 1){
+        if (count != 2){
             return false;
         }
         else{
