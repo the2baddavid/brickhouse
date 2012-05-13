@@ -53,6 +53,7 @@ public class validator {
         int temp = 0;
         
         for(int index = 0; index < row_array.length; index++){
+            // Note this is the first row!
             temp += new_roper(height, index);
         }       
         
@@ -71,11 +72,11 @@ public class validator {
         int num_matches = row_array[row_index].get_match_length();
         int matches[] = row_array[row_index].get_matches();
         
-        //TODO not sure if this needs to be 2 or 1
+        // Checks Rows Beyond the second
         if (height > 2){
             int temp = 0;
             for(int index=0; index < num_matches; index++){
-                temp += new_roper(height-1, matches[index])*num_matches;                
+                temp += new_roper(height-1, matches[index]);                
             }
             return temp;
         }

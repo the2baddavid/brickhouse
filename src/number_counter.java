@@ -27,16 +27,6 @@ public class number_counter{
     public number_counter(double b1, double b2){
         brick1 = b1;
         brick2 = b2;
-    }   
-
-    /**
-        * Get the final size, which is the size of the array after it has been
-        * shrunk to only good inputs.
-        * 
-        * @return 
-        */
-    public int get_shrunk_size(){
-        return final_size;
     }
 
     /**
