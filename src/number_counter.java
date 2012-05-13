@@ -40,10 +40,7 @@ public class number_counter{
      */
     public row[] driver(double len, int base){
         // Shrinker might be throwing off the prebuilt results...
-            if ( len > (brick1+brick2))
-		return row_shrinker( row_generator( len, base), len);
-            else
-                return row_generator(len,base);
+            return row_shrinker( row_generator( len, base), len);
 	}
     
     /**
@@ -110,7 +107,7 @@ public class number_counter{
         int amount = (int)Math.pow(base, (int)len/brick1+1);
         row output[]; 
         
-        // Test if length is greater than the sum, true do normal op
+        // Test if length is greater than the sum, then do normal op
         // Add Condition of {0},{0,0},{0,0,0}... 
         
         if ( len > (brick1+brick2)){
@@ -155,6 +152,8 @@ public class number_counter{
                 row temp_row = new row(temp_num[index],len,temp_num[index].length);
                 output[index] = temp_row;
             }
+            
+            
         }
         return output;
     }

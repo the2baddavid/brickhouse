@@ -36,18 +36,19 @@ public class Brickhouse {
     
     
     public static void main(String[] args) {
+        
+/******************************************************************************/
+/*************************   Let's get started   ******************************/
+/******************************************************************************/
+        
         double height;
         double length;
-
-        final int rowLength = 100;
-        final int numberOfRows = 1000;
 
         int row_number = 0;
         row row_array[];
 
         double brick1 = 3;
         double brick2 = 4.5;
-        int base = 2;
                 
         // Start Clock
         time_counter count = new time_counter();
@@ -61,12 +62,20 @@ public class Brickhouse {
         length = Double.parseDouble(args[0]);
         height = Double.parseDouble(args[1]);
         
+/******************************************************************************/ 
+/*****************************  Handle Length    ******************************/ 
+/******************************************************************************/ 
+        
         // Create Rows and Trim to Only Correct Ones
         number_counter row_create = new number_counter(brick1, brick2);
         row_array = row_create.driver(length,2);
         row_number = row_array.length;
                 
-        // Find permutations of Row Cominations, if Height > 1
+/******************************************************************************/ 
+/*****************************  Handle Height    ******************************/ 
+/******************************************************************************/ 
+        
+        // Find which rows can follow which, if Height > 1
         if (height > 1){
             // Create Validator Object to Pass All Row Perms to
             validator validate = new validator(row_array,length,(int)height);
@@ -81,11 +90,13 @@ public class Brickhouse {
             correct = row_number;
         }
         
-        // Get run time and finish up
+/******************************************************************************/ 
+/********************* Get run time and finish up    **************************/ 
+/******************************************************************************/ 
+/******************************************************************************/ 
+      
         count.end();
-        runtime = count.runTime();
-        
         System.out.print(correct);
-        System.out.println("\nRun Time:"+runtime+" ms");
+        System.out.println("\nRun Time:"+count.runTime()+" ms");
     }
 }
