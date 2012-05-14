@@ -111,6 +111,6 @@ public class Brickhouse {
       
         count.end();
         System.out.print(correct);
-        System.out.println("\nRun Time:"+count.runTime()+" ms");
+    //  System.out.println("\nRun Time:"+count.runTime()+" ms");
     }
 }
