@@ -1,4 +1,14 @@
+
+/** 
+ * Brick house -- Contains the main function for computing all possible ways
+ * to build something out of two different bricks for a given height and length.
+ * 
+ * @author david bartz
+ */
+
 /*
+The Puzzle:
+
 Your niece was given a set of blocks for her birthday, and she has decided to build a panel using
 3”×1” and 4.5”×1" blocks. For structural integrity, the spaces between the blocks must not line up
 in adjacent rows. For example, the 13.5”×3” panel below is unacceptable, because some of the
@@ -24,10 +34,6 @@ Send the source code and let us know the value that your program computes, your 
 running time, and the kind of machine on which you ran it.
  */
 
-/** 
- * 
- * @author david
- */
 public class Brickhouse {
 
     /**
