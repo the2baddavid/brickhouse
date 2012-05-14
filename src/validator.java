@@ -17,10 +17,7 @@ import java.util.ArrayList;
  * function, which will use height for how often to recurse.  The loop also sums
  * all the returned answers, which are the number of possible solutions.
  * 
- * new_roper() - Function that recurses based on height.  The function 
- * returns the number of possible solutions for each row, which is multiplied
- * by the number each respective row has of possible solutions based on the row
- * number.
+ * reverse_lookup() - 
  * 
  * validate_all() - Purpose of the function is to find out which rows can
  * legally follow a given row.  The function does this by way of calling the
@@ -71,7 +68,7 @@ public class validator {
         // Keep rehashing height for all functions until correct height is
         // attained. Keep in mind that the height is already computed to 1,
         // so the first one computed will be height 2
-        for(int i1 = 2; i1 < height; i1++){
+        for(int i1 = 3; i1 < height; i1++){
             // For each Row
             for(int i2 = 0; i2 < row_array.length; i2++){
                 // Rolling Sum of the weights that combine to make the new weight for row i2
@@ -116,7 +113,7 @@ public class validator {
             }
             
             row_array[index1].set_matches(valid, valid_counter);
-            row_array[index1].set_height_hash(valid_counter,1);
+            row_array[index1].set_height_hash(valid_counter,2);
         }
     }
     
