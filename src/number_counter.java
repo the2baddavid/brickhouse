@@ -1,8 +1,41 @@
-/**
+/************************** Number Counter  ***********************************
  * Creates Array of Row Objects
- * 
  * @author david
- */
+ * 
+ * Purpose - To generate all possible combinations of legal rows that can be
+ * used to build our structure.
+ * 
+ * ~~~~~~~~~~ Variables ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * brick1 - length of brick1
+ * brick2 - length of brick2
+ * final_size - holds the number of possible rows, based on correct length
+ * 
+ * ~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * number_counter() -- constructor, sets the brick sizes to use.
+ * 
+ * row_generator() -- This is the function that does the heavy lifting.  THe
+ * generator uses the smaller brick to figure out the max number of bricks
+ * needed, and the larger brick to find the minimum number of bricks needed. 
+ * This way, we only compute the rows of lengths that have possible solutions
+ * in them.  As an added bonus, before copying the newly generated rows into
+ * the working array, it checks to make sure that it is the right length.
+ * 
+ * convert_base() -- Base converter is used by the row_generator to convert
+ * numbers from base 10, to base 2.  The counting is to make sure that all
+ * possible solutions are accounted for.  The base 2 is used since we are only
+ * using two bricks, in which case finding permutations mimics the behavior of
+ * binary counting.  note that this function needs to be used in conjunction
+ * with the convert_amount_and_type.
+ * 
+ * convert_amount_and_type() --  Simply put, the function takes the output of
+ * convert_base which is a String, and casts it into an array of numbers so that 
+ * we can more easily manipulate it later.
+ * 
+ ******************************************************************************/
+
+
+
+
 
 public class number_counter{
     /**
