@@ -93,12 +93,12 @@ public class validator {
      * and then doing this again to attempt at removing redundant computations.
      */
     private void reverse_lookup(){
-        
-        //TODO: Might need to make this for height -1
-        // Keep rehashing height for all functions until correct height is attained
-        for(int i1 = 1; i1 < height-1; i1++){
+        // Keep rehashing height for all functions until correct height is
+        // attained. Keep in mind that the height is already computed to 1,
+        // so the first one computed will be height 2
+        for(int i1 = 2; i1 < height-1; i1++){
             // For each Row
-            for(int i2 = 0; i2 < row_array.length; i2++){
+            for(int i2 = 2; i2 < row_array.length; i2++){
                 // Rolling Sum of the weights that combine to make the new weight for row i2
                 int sum = 0;
                 // Holds the matches of the current row
@@ -107,10 +107,10 @@ public class validator {
                 for(int i3 = 0 ; i3 < matches.length ; i3++){
                     sum += row_array[matches[i3]].get_height_hash();
                 }
-                // The sum becomes the new weight for the current hash, i2
-                row_array[i2].set_height_hash(sum);
+                // The sum becomes the new weight for the current hash, i2, and
+                // the new height increments, i1
+                row_array[i2].set_height_hash(sum,i1);
                 // Increment height of hash, to reflect the height of the new weight
-                row_array[i2].set_height_of_hash(i1);
             }
         }
     }
@@ -140,8 +140,7 @@ public class validator {
             }
             
             row_array[index1].set_matches(valid, valid_counter);
-            row_array[index1].set_height_hash(valid_counter);
-            row_array[index1].set_height_of_hash(1);
+            row_array[index1].set_height_hash(valid_counter,1);
         }
     }
     

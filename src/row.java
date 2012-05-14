@@ -83,16 +83,13 @@ public class row {
         return matches.length;
     }
     
-    public void set_height_hash(int temp){
-        height_weight = temp;
+    public void set_height_hash(int hash, int new_height){
+        height_weight = hash;
+        height_of_hash = new_height;
     }
     
     public int get_height_hash(){
         return height_weight;
-    }
-    
-    public void set_height_of_hash(int temp){
-        height_of_hash=temp;
     }
     
     public int get_height_of_hash(){
