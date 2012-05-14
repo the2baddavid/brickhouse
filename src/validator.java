@@ -17,7 +17,9 @@ import java.util.ArrayList;
  * function, which will use height for how often to recurse.  The loop also sums
  * all the returned answers, which are the number of possible solutions.
  * 
- * reverse_lookup() - 
+ * reverse_lookup() - Function attempts to build the number of possibles
+ * from the ground up, by loop through each and adding its respective children,
+ * and then doing this again to attempt at removing redundant computations.
  * 
  * validate_all() - Purpose of the function is to find out which rows can
  * legally follow a given row.  The function does this by way of calling the
@@ -46,45 +48,67 @@ public class validator {
         height = h;
 }
     
+    /**
+     * Function is what does the final adding of the rows, part that puts all
+     * the puzzle pieces together.  The function calls reverse lookup to happen,
+     * and then adds the results.
+     * 
+     * uses - row array length 
+     * @return sum -- possibles for given height
+     */
     public long height_handler(){
-        long temp = 0;
+        long sum = 0;
         reverse_lookup();
         
         // TODO: Swap out new_roper for reverse_lookup
         for(int index = 0; index < row_array.length; index++){
             // Note this is the first row!
-            temp += row_array[index].get_height_hash();
+            sum += row_array[index].get_height_hash();
         }       
         
-        return temp;
+        return sum;
     }
     
     /**
      * Reverse lookup -- Function attempts to build the number of possibles
      * from the ground up, by loop through each and adding its respective children,
      * and then doing this again to attempt at removing redundant computations.
+     * 
+     * Uses - Height -- for know how many times to recompute
+     * Uses - Row Array -- for looping up information on the rows
+     * Stores - Sum -- to add the currents to get the new, then stores in row
      */
     private void reverse_lookup(){
+        long temp_weights[] = new long[row_array.length];
+        
         // Keep rehashing height for all functions until correct height is
-        // attained. Keep in mind that the height is already computed to 1,
-        // so the first one computed will be height 2
-        for(int i1 = 3; i1 < height; i1++){
+        // attained. Keep in mind that the height is already computed to 2,
+        // so the first one computed will be height 3
+        
+        for(int i1 = 3; i1 <= height; i1++){
             // For each Row
             for(int i2 = 0; i2 < row_array.length; i2++){
-                // Rolling Sum of the weights that combine to make the new weight for row i2
+                // Sum of the weights that combine to make the new weight for row i2
                 long sum = 0;
-                
                 // Holds the matches of the current row
                 int matches[] = row_array[i2].get_matches();
+                
                 // Look up and sum the weights of the rows that follow
                 for(int i3 = 0 ; i3 < matches.length ; i3++){
                     sum += row_array[matches[i3]].get_height_hash();
                 }
+                
                 // The sum becomes the new weight for the current hash, i2, and
-                // the new height increments, i1
-                row_array[i2].set_height_hash(sum,i1);
-                // Increment height of hash, to reflect the height of the new weight
+                // the new height increments, i1.  However we must use a temp
+                // variable here, so that when the later values are calculated
+                // they are do so using the current height, not the new one
+                temp_weights[i2] = sum;
             }
+            // Commit changes to the hash weights here
+            for (int i2 = 0; i2 < row_array.length; i2++){
+                row_array[i2].set_height_hash(temp_weights[i2],i1);
+            }
+            
         }
     }
     
