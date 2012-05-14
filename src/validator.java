@@ -18,8 +18,8 @@ import java.util.ArrayList;
  * all the returned answers, which are the number of possible solutions.
  * 
  * reverse_lookup() - Function attempts to build the number of possibles
- * from the ground up, by loop through each and adding its respective children,
- * and then doing this again to attempt at removing redundant computations.
+ * from the ground up, by looping through each and adding its respective 
+ * children, doing this to attempt at removing redundant computations.
  * 
  * validate_all() - Purpose of the function is to find out which rows can
  * legally follow a given row.  The function does this by way of calling the
