@@ -51,10 +51,12 @@ public class validator {
     
     public int height_handler(){
         int temp = 0;
+        reverse_lookup();
         
+        // TODO: Swap out new_roper for reverse_lookup
         for(int index = 0; index < row_array.length; index++){
             // Note this is the first row!
-            temp += new_roper(height, index);
+            temp += row_array[index].get_height_hash();
         }       
         
         return temp;
@@ -85,6 +87,34 @@ public class validator {
         }
     }
     
+    /**
+     * Reverse lookup -- Function attempts to build the number of possibles
+     * from the ground up, by loop through each and adding its respective children,
+     * and then doing this again to attempt at removing redundant computations.
+     */
+    private void reverse_lookup(){
+        
+        //TODO: Might need to make this for height -1
+        // Keep rehashing height for all functions until correct height is attained
+        for(int i1 = 1; i1 < height-1; i1++){
+            // For each Row
+            for(int i2 = 0; i2 < row_array.length; i2++){
+                // Rolling Sum of the weights that combine to make the new weight for row i2
+                int sum = 0;
+                // Holds the matches of the current row
+                int matches[] = row_array[i2].get_matches();
+                // Look up and sum the weights of the rows that follow
+                for(int i3 = 0 ; i3 < matches.length ; i3++){
+                    sum += row_array[matches[i3]].get_height_hash();
+                }
+                // The sum becomes the new weight for the current hash, i2
+                row_array[i2].set_height_hash(sum);
+                // Increment height of hash, to reflect the height of the new weight
+                row_array[i2].set_height_of_hash(i1);
+            }
+        }
+    }
+    
     
     
     /**
@@ -110,6 +140,8 @@ public class validator {
             }
             
             row_array[index1].set_matches(valid, valid_counter);
+            row_array[index1].set_height_hash(valid_counter);
+            row_array[index1].set_height_of_hash(1);
         }
     }
     
@@ -142,7 +174,7 @@ public class validator {
             if (hash2.contains(hash1.get(index))){
                 count++;
                 
-                // if at any point the count is greater than 1, then the row is invalid
+                // if at any point the count is greater than 1, then the row is invalid;
                 if (count > 1){
                     return false;
                 }

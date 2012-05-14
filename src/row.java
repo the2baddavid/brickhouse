@@ -8,8 +8,14 @@ public class row {
     private double my_row[];
     private double my_row_length;
     private int my_array_length;
+    
+    // Used for determining Sets of 2
     private int matches[];
     private ArrayList sum_hash = new ArrayList();
+    
+    // Used to make set higher than 2
+    private int height_weight = 0;
+    private int height_of_hash = 0;
     
     public row(double input[], double row_length, int array_length){
         my_row = input;
@@ -75,5 +81,21 @@ public class row {
     
     public int get_match_length(){
         return matches.length;
+    }
+    
+    public void set_height_hash(int temp){
+        height_weight = temp;
+    }
+    
+    public int get_height_hash(){
+        return height_weight;
+    }
+    
+    public void set_height_of_hash(int temp){
+        height_of_hash=temp;
+    }
+    
+    public int get_height_of_hash(){
+        return height_of_hash;
     }
 }
