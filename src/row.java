@@ -14,8 +14,8 @@ public class row {
     private ArrayList sum_hash = new ArrayList();
     
     // Used to make set higher than 2
-    private int height_weight = 0;
-    private int height_of_hash = 0;
+    private long height_weight = 0;
+    private long height_of_hash = 0;
     
     public row(double input[], double row_length, int array_length){
         my_row = input;
@@ -83,16 +83,16 @@ public class row {
         return matches.length;
     }
     
-    public void set_height_hash(int hash, int new_height){
+    public void set_height_hash(long hash, long new_height){
         height_weight = hash;
         height_of_hash = new_height;
     }
     
-    public int get_height_hash(){
+    public long get_height_hash(){
         return height_weight;
     }
     
-    public int get_height_of_hash(){
+    public long get_height_of_hash(){
         return height_of_hash;
     }
 }

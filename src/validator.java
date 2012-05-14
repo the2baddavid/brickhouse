@@ -49,8 +49,8 @@ public class validator {
         height = h;
 }
     
-    public int height_handler(){
-        int temp = 0;
+    public long height_handler(){
+        long temp = 0;
         reverse_lookup();
         
         // TODO: Swap out new_roper for reverse_lookup
@@ -63,31 +63,6 @@ public class validator {
     }
     
     /**
-     * Recursive function which should calculate all possible combinations of
-     * rows based on a given height
-     * 
-     * @param height
-     * @param row_index
-     * @return 
-     */
-    private int new_roper(int height, int row_index){
-        int num_matches = row_array[row_index].get_match_length();
-        int matches[] = row_array[row_index].get_matches();
-        
-        // Checks Rows Beyond the second
-        if (height > 2){
-            int temp = 0;
-            for(int index=0; index < num_matches; index++){
-                temp += new_roper(height-1, matches[index]);                
-            }
-            return temp;
-        }
-        else{
-            return num_matches;
-        }
-    }
-    
-    /**
      * Reverse lookup -- Function attempts to build the number of possibles
      * from the ground up, by loop through each and adding its respective children,
      * and then doing this again to attempt at removing redundant computations.
@@ -96,11 +71,12 @@ public class validator {
         // Keep rehashing height for all functions until correct height is
         // attained. Keep in mind that the height is already computed to 1,
         // so the first one computed will be height 2
-        for(int i1 = 2; i1 < height-1; i1++){
+        for(int i1 = 2; i1 < height; i1++){
             // For each Row
-            for(int i2 = 2; i2 < row_array.length; i2++){
+            for(int i2 = 0; i2 < row_array.length; i2++){
                 // Rolling Sum of the weights that combine to make the new weight for row i2
-                int sum = 0;
+                long sum = 0;
+                
                 // Holds the matches of the current row
                 int matches[] = row_array[i2].get_matches();
                 // Look up and sum the weights of the rows that follow
