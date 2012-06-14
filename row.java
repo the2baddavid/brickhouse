@@ -147,8 +147,8 @@ public class row {
      * rows.  Said another way, it holds the number of possible solutions for
      * the respective row, at the height specified by the height_of_hash.
      * 
-     * @param hash
-     * @param new_height 
+     * @param hash New Weight to Set
+     * @param new_height New Height for Weight
      */
     public void set_height_hash(long hash, long new_height){
         height_weight = hash;
