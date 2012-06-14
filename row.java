@@ -3,27 +3,46 @@ import java.util.ArrayList;
 /**
  * Object to Hold Data For Brick House
  * @author david
+ *
+ * ~~~	Data Members ~~~
+ *	my_row[] -- Holds the bricks that are being used to create row
+ *	my_row_length -- total length of the row based on brick sizes
+ *	my_array_length -- number of bricks per row, or length of array holding the brick information
+ *
+ *	matches[] -- rows that can legally be used with THIS row
+ *	sum_hash -- similar to my_row_length but holds sums of rows at each brick end for determining matches
+ *
+ *	height_weight -- number of solutions for the row based on the current height and matches
+ * 	height_of_hash -- height of cached weight for the row (cached number of solutions)
+ *
+ * ~~~ 	Functions ~~~~
  */
 public class row {
-    private double my_row[];
-    private double my_row_length;
-    private int my_array_length;
+	private double my_row[];
+	private double my_row_length;
+	private int my_array_length;
+
+	// Used for determining Sets of 2
+	private int matches[];
+	private ArrayList sum_hash = new ArrayList();
+
+	// Used to make set higher than 2
+	private long height_weight = 0;
+	private long height_of_hash = 0;
     
-    // Used for determining Sets of 2
-    private int matches[];
-    private ArrayList sum_hash = new ArrayList();
-    
-    // Used to make set higher than 2
-    private long height_weight = 0;
-    private long height_of_hash = 0;
-    
-    public row(double input[], double row_length, int array_length){
-        my_row = input;
-        my_array_length = my_row.length;
-        my_row_length = get_row_sum();
-        System.arraycopy(input, 0, my_row, 0, my_array_length);
-        set_hash();
-    }
+	/**
+	* Constructor
+	* @param input --
+	* @param row_length --
+	* @param array_length --
+	*/
+	public row(double input[], double row_length, int array_length){
+		my_row = input;
+		my_array_length = my_row.length;
+		my_row_length = get_row_sum();
+		System.arraycopy(input, 0, my_row, 0, my_array_length);
+		set_hash();
+	}
     
     /**
      * Returns the blocks used to create the row
@@ -35,7 +54,7 @@ public class row {
     
     /**
      * Sums contents of Array, and returns answer.  Used for determining if
-     * said row is the correct length so that it can be otherwise discarded.
+     * THIS row is the correct length so that it can be otherwise discarded.
      * Private function, that is used only when the constructor is called.
      * 
      * @return sum of array

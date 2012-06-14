@@ -60,8 +60,7 @@ public class validator {
         long sum = 0;
         reverse_lookup();
         
-        // TODO: Swap out new_roper for reverse_lookup
-        for(int index = 0; index < row_array.length; index++){
+        (int index = 0; index < row_array.length; index++){
             // Note this is the first row!
             sum += row_array[index].get_height_hash();
         }       
